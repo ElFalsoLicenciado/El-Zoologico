@@ -49,3 +49,7 @@ Por último, el director desea que para los *empleados*, *animales* y *visitante
 Para las *visitas* y los *mantenimientos* desea también que se cuente solo con la opción de **registro** y de **consulta**, no se podrán **eliminar** ni **modificar** una vez registradas.
 
 De igual forma, desea que se cuente con una `contraseña` para que solo el tenga acceso al sistema y pueda realizar todo lo descrito con anterioridad.
+
+# Integrantes:
+## Alberto Montoya Arriaga
+## Michael Aaron Villalón Nieves
