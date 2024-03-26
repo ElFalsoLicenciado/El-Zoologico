@@ -13,48 +13,73 @@ public class Functions {
     private boolean flag = false;
     public void sysExecution () {
         int p = 0;
-
         do {
 
-            setDate();
-            setDate();
-
-            System.out.println("1. Register.");
-            System.out.println("2. Update.");
-            System.out.println("3. Delete.");
-            System.out.println("4. View details.");
-            System.out.println("0. Quit\n");
-            System.out.print("Input: ");
-            p = sc.nextInt(); sc.nextLine();
-
+            do {
+                try {
+                    System.out.println("1. Register.");
+                    System.out.println("2. Update.");
+                    System.out.println("3. Delete.");
+                    System.out.println("4. View details.");
+                    System.out.println("0. Quit\n");
+                    System.out.print("Input: ");
+                    p = sc.nextInt();
+                    flag = true;
+                }catch (InputMismatchException e){
+                    System.out.println("Invalid input.\n");
+                    sc.nextLine();
+                }
+            }while (!flag);
+            flag = false;
 
             switch (p) {
                 case 1:
-                    System.out.println("1. Worker.");
-                    System.out.println("2. Client.");
-                    System.out.println("3. Animal.");
-                    System.out.println("4. Tour.");
-                    System.out.println("5. Maintenance.");
+                    System.out.println("1. Register a worker.");
+                    System.out.println("2. Register a client.");
+                    System.out.println("3. Register an animal.");
+                    System.out.println("4. Register a tour.");
+                    System.out.println("5. Register a maintenance.");
+                    System.out.println("0. Return");
+
 
                     break;
-                case 2:
 
+                case 2:
+                    System.out.println("1. Modify a worker");
+                    System.out.println("2. Modify a client.");
+                    System.out.println("3. Modify an animal.");
+                    System.out.println("0. Return");
                     break;
 
                 case 3:
+                    System.out.println("1. Remove a worker");
+                    System.out.println("2. Remove a client.");
+                    System.out.println("3. Remove an animal.");
+                    System.out.println("0. Return");
+                    break;
+
+                case 4:
+                    System.out.println("1. View a worker.");
+                    System.out.println("2. View a client.");
+                    System.out.println("3. View an animal.");
+                    System.out.println("4. View a tour.");
+                    System.out.println("5. View a maintenance.");
+                    System.out.println("0. Return");
 
                     break;
-                case 4:
 
+                case 0:
+                    System.out.println("Cheers");
                     break;
                 default:
                     System.out.println("Try again");
                     break;
             }
         } while (p != 0);
-        System.out.println("Goodbye");
     }
 
+    /*A la hora de calcular la edad de un chamo, pienso en sacar el año mediante obtener la anchura de la fecha, el año tiene 4 dígitos así que
+    * ejemplo year = Integer.parseInt(date.substring(date.length-4,date.length)); */
     public String setDate (){
         String date = "";
         int m = 0;
@@ -66,6 +91,7 @@ public class Functions {
                     flag = true;
                 }catch (InputMismatchException e){
                     System.out.println("Invalid input");
+                    sc.nextLine();
                 }
             }while (!flag);
             flag = false;
@@ -85,6 +111,7 @@ public class Functions {
                             flag = true;
                         } catch (InputMismatchException e) {
                             System.out.println("Invalid input");
+                            sc.nextLine();
                         }
                     } while (!flag);
                     flag = false;
@@ -102,6 +129,7 @@ public class Functions {
                             flag = true;
                         }catch (InputMismatchException e){
                             System.out.println("Invalid input");
+                            sc.nextLine();
                         }
                     }while (!flag);
                     flag = false;
@@ -123,6 +151,7 @@ public class Functions {
                             flag = true;
                         } catch (InputMismatchException e) {
                             System.out.println("Invalid input");
+                            sc.nextLine();
                         }
                     } while (!flag);
                     flag = false;
@@ -140,6 +169,7 @@ public class Functions {
                             flag = true;
                         }catch (InputMismatchException e){
                             System.out.println("Invalid input");
+                            sc.nextLine();
                         }
                     }while (!flag);
                     flag = false;
@@ -161,6 +191,7 @@ public class Functions {
                             flag = true;
                         } catch (InputMismatchException e) {
                             System.out.println("Invalid input");
+                            sc.nextLine();
                         }
                     } while (!flag);
                     flag = false;
@@ -178,6 +209,7 @@ public class Functions {
                             flag = true;
                         }catch (InputMismatchException e){
                             System.out.println("Invalid input");
+                            sc.nextLine();
                         }
                     }while (!flag);
                     flag = false;
@@ -191,6 +223,4 @@ public class Functions {
         }
         return date;
     }
-
-
 }
