@@ -2,18 +2,22 @@ package Base;
 
 import Objects.*;
 import Storage.*;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.ArrayList;
 
 
 public class Functions {
     private Scanner sc = new Scanner(System.in);
-
+    private boolean flag = false;
     public void sysExecution () {
         int p = 0;
 
         do {
+
+            setDate();
+            setDate();
 
             System.out.println("1. Register.");
             System.out.println("2. Update.");
@@ -51,8 +55,141 @@ public class Functions {
         System.out.println("Goodbye");
     }
 
-    public String setDate (int day, String month, int year){
-        return String.format("%d/%s/%d",day,month,year);
+    public String setDate (){
+        String date = "";
+        int m = 0;
+        do{
+            do {
+                try{
+                    System.out.print("\nSelect a month.\n1.January 2. February 3. March 4. April 5. May 6. June\n7. July 8. August 9. September 10. October 11. November 12. December\nInput: ");
+                    m = sc.nextInt();
+                    flag = true;
+                }catch (InputMismatchException e){
+                    System.out.println("Invalid input");
+                }
+            }while (!flag);
+            flag = false;
+            if (m<0 || m>12){
+                System.out.println("Out of bonds.");
+            }
+        }while (m<0 || m>12);
+
+        switch (m) {
+            case 1, 3, 5, 7, 8, 10, 12 -> {
+                int d = 0;
+                do {
+                    do {
+                        try {
+                            System.out.print("\nWrite the day: ");
+                            d = sc.nextInt();
+                            flag = true;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Invalid input");
+                        }
+                    } while (!flag);
+                    flag = false;
+                    if(d < 0 || d > 31){
+                        System.out.println("Out of bonds.");
+                    }
+                } while (d < 0 || d > 31);
+
+                int y = 0;
+                do{
+                    do {
+                        try {
+                            System.out.println("Write the year: ");
+                            y = sc.nextInt();
+                            flag = true;
+                        }catch (InputMismatchException e){
+                            System.out.println("Invalid input");
+                        }
+                    }while (!flag);
+                    flag = false;
+                    if (y<1000 || y>2024){
+                        System.out.println("Out of bonds.");
+                    }
+                }while (y<1000 || y>2024);
+
+                date = String.format("%d/%d/%d",d,m,y);
+            }
+
+            case 2 -> {
+                int d = 0;
+                do {
+                    do {
+                        try {
+                            System.out.print("\nWrite the day: ");
+                            d = sc.nextInt();
+                            flag = true;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Invalid input");
+                        }
+                    } while (!flag);
+                    flag = false;
+                    if (d < 0 || d > 28){
+                        System.out.println("Out of bonds.");
+                    }
+                } while (d < 0 || d > 28);
+
+                int y = 0;
+                do{
+                    do {
+                        try {
+                            System.out.print("\nWrite the year: ");
+                            y = sc.nextInt();
+                            flag = true;
+                        }catch (InputMismatchException e){
+                            System.out.println("Invalid input");
+                        }
+                    }while (!flag);
+                    flag = false;
+                    if (y<1000 || y>2024){
+                        System.out.println("Out of bonds.");
+                    }
+                }while (y<1000 || y>2024);
+
+                date = String.format("%d/%d/%d",d,m,y);
+            }
+
+            case 4,6,9,11 -> {
+                int d = 0;
+                do {
+                    do {
+                        try {
+                            System.out.print("\nWrite the day: ");
+                            d = sc.nextInt();
+                            flag = true;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Invalid input");
+                        }
+                    } while (!flag);
+                    flag = false;
+                    if (d < 0 || d > 30){
+                        System.out.println("Out of bonds.");
+                    }
+                } while (d < 0 || d > 30);
+
+                int y = 0;
+                do{
+                    do {
+                        try {
+                            System.out.print("\nWrite the year: ");
+                            y = sc.nextInt();
+                            flag = true;
+                        }catch (InputMismatchException e){
+                            System.out.println("Invalid input");
+                        }
+                    }while (!flag);
+                    flag = false;
+                    if (y<1000 || y>2024){
+                        System.out.println("Out of bonds.");
+                    }
+                }while (y<1000 || y>2024);
+
+                date = String.format("%d/%d/%d",d,m,y);
+            }
+        }
+        return date;
     }
 
 

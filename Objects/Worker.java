@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Worker {
 
     private static int n = 0;
-    private String ID;
+    private String ID = "";
     private String name = "";
     private String lastName = "";
     private String birthday = "";
@@ -28,7 +28,7 @@ public class Worker {
         this.schedule = schedule;
         this.role = role;
         n++;
-        ID = UUID.randomUUID().toString().substring(0,12);
+        ID = "W" + UUID.randomUUID().toString().substring(1,12);
     }
 
     public String getID(){

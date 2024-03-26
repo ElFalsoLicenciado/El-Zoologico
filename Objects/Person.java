@@ -5,7 +5,7 @@ import java.util.UUID;
 public class Person {
 
     private static int n = 0;
-    private String ID;
+    private String ID = "";
     private String name = "";
     private String lastName = "";
     private String birthday = "";
@@ -21,7 +21,7 @@ public class Person {
         this.numVisits = numVisits;
         this.dateOfRegister = dateOfRegister;
         n++;
-        ID = UUID.randomUUID().toString().substring(0,12);
+        ID = "C" + UUID.randomUUID().toString().substring(1,12);
     }
 
     public void setName(String name) {
