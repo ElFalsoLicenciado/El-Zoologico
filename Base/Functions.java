@@ -1,10 +1,10 @@
 package Base;
 
-import Actions.Maintenance;
-import Actions.Tour;
+import Objects.Maintenance;
+import Objects.Tour;
 import Things.Animal;
-import Things.Person;
-import Things.Worker;
+import Objects.Person;
+import Objects.Worker;
 
 import java.util.ArrayList;
 

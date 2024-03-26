@@ -1,4 +1,4 @@
-package Things;
+package Objects;
 
 public class Animal {
 }

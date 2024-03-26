@@ -1,6 +1,6 @@
-package Actions;
+package Objects;
 
-import Things.Person;
+import Objects.Person;
 
 import java.util.ArrayList;
 

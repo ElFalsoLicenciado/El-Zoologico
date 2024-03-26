@@ -1,4 +1,4 @@
-package Things;
+package Objects;
 
 import java.util.UUID;
 import java.util.Scanner;
