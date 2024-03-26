@@ -1,26 +1,58 @@
 package Base;
 
-import Objects.Maintenance;
-import Objects.Tour;
-import Things.Animal;
-import Objects.Person;
-import Objects.Worker;
-
+import Objects.*;
+import Storage.*;
+import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.ArrayList;
 
+
 public class Functions {
-    private ArrayList<Worker> workList = new ArrayList<Worker>();
-    private ArrayList<Person> vistList = new ArrayList<Person>();
-    private ArrayList<Animal> animList = new ArrayList<Animal>();
-    private ArrayList<Tour> tourList = new ArrayList<Tour>();
-    private ArrayList<Maintenance> mainList = new ArrayList<Maintenance>();
+    private Scanner sc = new Scanner(System.in);
+
+    public void sysExecution () {
+        int p = 0;
+
+        do {
+
+            System.out.println("1. Register.");
+            System.out.println("2. Update.");
+            System.out.println("3. Delete.");
+            System.out.println("4. View details.");
+            System.out.println("0. Quit\n");
+            System.out.print("Input: ");
+            p = sc.nextInt(); sc.nextLine();
 
 
+            switch (p) {
+                case 1:
+                    System.out.println("1. Worker.");
+                    System.out.println("2. Client.");
+                    System.out.println("3. Animal.");
+                    System.out.println("4. Tour.");
+                    System.out.println("5. Maintenance.");
 
+                    break;
+                case 2:
+
+                    break;
+
+                case 3:
+
+                    break;
+                case 4:
+
+                    break;
+                default:
+                    System.out.println("Try again");
+                    break;
+            }
+        } while (p != 0);
+        System.out.println("Goodbye");
+    }
 
     public String setDate (int day, String month, int year){
-        String date = String.format("%d/%s/%d",day,month,year);
-        return date;
+        return String.format("%d/%s/%d",day,month,year);
     }
 
 
