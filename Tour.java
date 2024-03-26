@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 public class Tour {
-    private static int ID = 0;
+    private static int n = 0;
+    private int ID;
     private String guide = "";
     private ArrayList<Person> visitors = new ArrayList<Person>();
     private int money = 0;
@@ -16,7 +17,8 @@ public class Tour {
         this.date = date;
         this.kidsAmount = kidsAmount;
         this.adultsAmount = adultsAmount;
-        ID++;
+        n++;
+        ID = n;
     }
 
     public String getDetails(){

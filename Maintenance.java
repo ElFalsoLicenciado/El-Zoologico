@@ -1,5 +1,6 @@
 public class Maintenance {
-    private static int ID = 0;
+    private static int n = 0;
+    private int ID;
     private String employee="";
     private int idAnimal = 0;
     private String process="";
@@ -12,7 +13,8 @@ public class Maintenance {
         this.process = process;
         this.date = date;
         this.comment = comment;
-        ID++;
+        n++;
+        ID = n;
     }
 
     public String getDetails(){

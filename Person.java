@@ -1,5 +1,9 @@
+import java.util.UUID;
+
 public class Person {
-    private static int ID = 0;
+
+    private static int n = 0;
+    private String ID;
     private String name = "";
     private String lastName = "";
     private String birthday = "";
@@ -14,6 +18,8 @@ public class Person {
         this.CURP = CURP;
         this.numVisits = numVisits;
         this.dateOfRegister = dateOfRegister;
+        n++;
+        ID = UUID.randomUUID().toString().substring(0,12);
     }
 
     public void setName(String name) {
@@ -40,7 +46,7 @@ public class Person {
         this.dateOfRegister = dateOfRegister;
     }
 
-    public static int getID() {
+    public String getID() {
         return ID;
     }
 
