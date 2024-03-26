@@ -1,3 +1,7 @@
+package Actions;
+
+import Things.Person;
+
 import java.util.ArrayList;
 
 public class Tour {
