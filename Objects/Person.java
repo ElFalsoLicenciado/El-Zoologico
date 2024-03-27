@@ -4,31 +4,25 @@ import java.util.UUID;
 
 public class Person {
 
-    private static int n = 0;
     private String ID = "";
-    private String name = "";
-    private String lastName = "";
-    private String birthday = "";
-    private String CURP = "";
+    private String name;
+    private String lastName;
+    private String birthday;
+    private String CURP;
     private int numVisits = 0;
-    private String dateOfRegister = "";
+    private String dateOfRegister;
 
-    public Person(String name, String lastName, String birthday, String CURP, int numVisits, String dateOfRegister) {
+    public Person(String name, String lastName, String birthday, String CURP, String dateOfRegister) {
         this.name = name;
         this.lastName = lastName;
         this.birthday = birthday;
         this.CURP = CURP;
-        this.numVisits = numVisits;
         this.dateOfRegister = dateOfRegister;
-        n++;
         setID();
     }
 
-    public void setName(String name) {
+    public void setName(String name, String lastName) {
         this.name = name;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
@@ -56,14 +50,13 @@ public class Person {
     public void setID(){
         int x = birthday.lastIndexOf("/");
         int year = Integer.parseInt(birthday.substring(x+1));
-        System.out.println(year); //Verificar edad
-        if((year-2024)>18){
+        System.out.println(year);
+        if((2024-year)>17){
             ID = "CA" + UUID.randomUUID().toString().substring(2,12);
-        }else if((year-2024)<18){
+        }else if((2024-year)<18){
             ID = "CC" + UUID.randomUUID().toString().substring(2,12);
         }
-
-        }
+    }
 
     public String getName() {
         return String.format("%s %s",name,lastName);

@@ -1,11 +1,7 @@
 package Base;
 
-import Objects.*;
-import Storage.*;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 
 public class Menu {
@@ -62,22 +58,22 @@ public class Menu {
                         }
                         case 2 -> {
                             System.out.println("Registering a client");
-
+                            zoo.registerClient();
                             i=0;
                         }
                         case 3 -> {
                             System.out.println("Registering an animal");
-
+                            zoo.registerAnimal();
                             i=0;
                         }
                         case 4 -> {
                             System.out.println("Registering a tour");
-
+                            zoo.registerTour();
                             i=0;
                         }
                         case 5 -> {
                             System.out.println("Registering a maintenance");
-
+                            zoo.registerMaintenance();
                             i=0;
                         }
                         case 0 -> System.out.println("Returning");

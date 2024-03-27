@@ -3,16 +3,14 @@ package Objects;
 import java.util.UUID;
 import java.util.ArrayList;
 public class Animal {
-
-    private static int n = 0;
     private String ID = "";
-    private String type = "";
-    private String dateOfArrival = "";
-    private double weight = 0;
-    private ArrayList<String> diseases = new ArrayList<String>();
-    private int feedFrequency = 0;
-    private String feedType = "";
-    private boolean vaccines = false;
+    private String type;
+    private String dateOfArrival;
+    private double weight;
+    private ArrayList<String> diseases = new ArrayList<>();
+    private int feedFrequency;
+    private String feedType;
+    private boolean vaccines;
 
     public Animal(String type, String dateOfArrival, double weight, ArrayList<String> diseases, int feedFrequency, String feedType, boolean vaccines) {
         this.type = type;
@@ -22,14 +20,16 @@ public class Animal {
         this.feedFrequency = feedFrequency;
         this.feedType = feedType;
         this.vaccines = vaccines;
-        n++;
-        ID = "A" + UUID.randomUUID().toString().substring(1,12);
+        setID();
     }
 
     public String getID() {
         return ID;
     }
 
+    public void setID(){
+        ID = "A" + UUID.randomUUID().toString().substring(1,12);
+    }
     public String getType() {
         return type;
     }
@@ -82,7 +82,7 @@ public class Animal {
         this.feedType = feedType;
     }
 
-    public boolean isVaccines() {
+    public boolean isVaccinated() {
         return vaccines;
     }
 
