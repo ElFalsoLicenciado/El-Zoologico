@@ -21,7 +21,7 @@ public class Person {
         this.numVisits = numVisits;
         this.dateOfRegister = dateOfRegister;
         n++;
-        ID = "C" + UUID.randomUUID().toString().substring(1,12);
+        setID();
     }
 
     public void setName(String name) {
@@ -34,6 +34,7 @@ public class Person {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+        setID();
     }
 
     public void setCURP(String CURP) {
@@ -51,6 +52,18 @@ public class Person {
     public String getID() {
         return ID;
     }
+
+    public void setID(){
+        int x = birthday.lastIndexOf("/");
+        int year = Integer.parseInt(birthday.substring(x+1));
+        System.out.println(year); //Verificar edad
+        if((year-2024)>18){
+            ID = "CA" + UUID.randomUUID().toString().substring(2,12);
+        }else if((year-2024)<18){
+            ID = "CC" + UUID.randomUUID().toString().substring(2,12);
+        }
+
+        }
 
     public String getName() {
         return String.format("%s %s",name,lastName);

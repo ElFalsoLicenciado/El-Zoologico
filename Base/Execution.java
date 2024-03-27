@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Execution {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Menu zoo = new Menu();
+        Menu menu = new Menu();
         Random rn = new Random();
         final String safePass = "candeChamba";
         boolean passIsValid = false;
@@ -39,7 +39,7 @@ public class Execution {
                 }
                 System.out.print("\033[H\033[2J");
                 System.out.println("\nYou are in.\n");
-                zoo.sysExecution();
+                menu.sysExecution();
             } else {
                 System.out.println("\nPassword is incorrect, try again.");
             }
