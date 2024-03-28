@@ -114,10 +114,12 @@ public class Functions {
 
     public void registerTour(){
         boolean guideFound = false;
+        ArrayList<Worker> guides = new ArrayList<Worker>();
+        ArrayList<Person> avClients = Clients.clientList;
         for (Worker worker : Workers.workerList){
-            if (worker.getRole().equals("Technician")) {
+            if (worker.getRole().equals("Guide")) {
                 guideFound = true;
-                break;
+                guides.add(worker);
             }
         }
         if(!guideFound && Clients.clientList.isEmpty()){
@@ -127,13 +129,209 @@ public class Functions {
         }else if (Clients.clientList.isEmpty()){
             System.out.println("There's no clients available.");
         } else {
+            ArrayList<String> visitors = new ArrayList<String>();
+            int kids = 0;
+            int adults = 0;
+            int money = 0;
+            int g = 0;
+            do {
+                do {
+                    try {
+                        showSpecificWorkers(guides);
+                        System.out.print("Select an guide: ");
+                        g = sc.nextInt();
+                        flag = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input.");
+                        sc.nextLine();
+                    }
+                } while (!flag);
+                flag = false; sc.nextLine();
+                if (g<1 || g>guides.size()){
+                    System.out.println("Out of bonds.");
+                }
+            }while (g<1 || g>guides.size());
+            String guide = guides.get(g-1).getName();
 
+            int v = 0;
+            int x = 0;
+            int count = 0;
+            do {
+                try{
+                    System.out.println("Wanna add an visitor?\n1.Yes 0. No");
+                    x = sc.nextInt();
+                }catch (InputMismatchException e ){
+                    System.out.println("Invalid input.");
+                    sc.nextLine();
+                }
+                switch (x){
+                    case 1 -> {
+                        do {
+                            do {
+                                try {
+                                    showAvailableClients(avClients);
+                                    System.out.print("Select a visitor: ");
+                                    v = sc.nextInt();
+                                    flag = true;
+                                } catch (InputMismatchException e) {
+                                    System.out.println("Invalid input.");
+                                    sc.nextLine();
+                                }
+                            } while (!flag);
+                            flag = true;
+                            if (v < 1 || v > avClients.size()) {
+                                System.out.println("Out of bonds");
+                            }
+                        } while (v < 1 || v > avClients.size());
+
+                        int year = Integer.parseInt((avClients.get(v-1).getBirthday()).substring(avClients.get(v-1).getBirthday().lastIndexOf("/")));
+                        System.out.println(year);
+
+                        if ((2024-year)>17){
+                            adults++;
+                            if(((avClients.get(v-1).getNumVisits())%5)==0){
+                                System.out.println((avClients.get(v-1).getNumVisits())%5);
+                                money = money + 80;
+                            }else {
+                                money = money + 100;
+                            }
+                        }else if((2024-year)<18){
+                            kids++;
+                            if(((avClients.get(v-1).getNumVisits())%5)==0){
+                                System.out.println((avClients.get(v-1).getNumVisits())%5);
+                                money = money + 40;
+                            }else {
+                                money = money + 50;
+                            }
+                        }
+
+                        visitors.add(avClients.get(v-1).getName());
+                        avClients.remove(v-1);
+                        count++;
+                    }
+                    case 0 ->{
+                        if (count<0){
+                            System.out.println("Add at least one visitor.");
+                        }else {
+                            flag = true;
+                        }
+                    }
+                    default -> System.out.println("Try again.");
+                }
+
+            }while (!flag);
+            flag = false;
         }
 
     }
 
     public void registerMaintenance(){
+        boolean techFound = false;
+        ArrayList<Worker> technicians = new ArrayList<Worker>();
+        for (Worker worker : Workers.workerList){
+            if (worker.getRole().equals("Technician")) {
+                techFound = true;
+                technicians.add(worker);
+            }
+        }
+        if(!techFound && Animals.animalList.isEmpty()){
+            System.out.println("There's neither technicians neither animals available.");
+        }else if(!techFound){
+            System.out.println("There's no technicians available,");
+        }else if (Animals.animalList.isEmpty()){
+            System.out.println("There's no animals available.");
+        } else {
+            int t = 0;
+            do {
+                do {
+                    try {
+                        showSpecificWorkers(technicians);
+                        System.out.print("Select an technician: ");
+                        t = sc.nextInt();
+                        flag = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input.");
+                        sc.nextLine();
+                    }
+                } while (!flag);
+                flag = false; sc.nextLine();
+                if (t<1 || t>technicians.size()){
+                    System.out.println("Out of bonds.");
+                }
+            }while (t<1 || t>technicians.size());
+            String technician = technicians.get(t-1).getName();
 
+            int a = 0;
+            do {
+                do {
+                    try {
+                        showAnimals();
+                        System.out.print("Select an technician: ");
+                        a = sc.nextInt();
+                        flag = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input.");
+                        sc.nextLine();
+                    }
+                } while (!flag);
+                flag = false; sc.nextLine();
+                if (a<1 || a>Animals.animalList.size()){
+                    System.out.println("Out of bonds.");
+                }
+            }while (a<1 || a>Animals.animalList.size());
+            String animalID = Animals.animalList.get(a-1).getID();
+
+            System.out.print("\nWrite the process: ");
+            String process = sc.nextLine();
+            System.out.println("Set the date: ");
+            String date = setDate();
+
+            String comments="";
+            int i = 0;
+                do {
+                    try {
+                        System.out.println("Any comments?\n 1. Yes 0. No");
+                        System.out.print("\nInput: ");
+                        i = sc.nextInt();
+                        flag = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Incorrect input.\n");
+                        sc.nextLine();
+                    }
+                } while (!flag);
+                flag = false; sc.nextLine();
+
+                switch (i){
+                    case 1 -> {
+                        System.out.println("Write the comment");
+                        comments = sc.nextLine();
+                    }
+                    case 0 -> {
+                        comments = "None";
+                    }
+                }
+            Maintenance maintenance = new Maintenance(technician,animalID,process,date,comments);
+            MaintenanceList.maintenanceList.add(maintenance);
+        }
+    }
+
+    public void showSpecificWorkers(ArrayList<Worker> list){
+        int i = 0;
+        for (Worker anyworker : list){
+            i++;
+            System.out.print("\n"+anyworker.getRole()+" #"+i);
+            System.out.printf("\nID: %s   Full name: %s   \n",anyworker.getID(),anyworker.getName());
+        }
+        System.out.println();
+    }
+
+    public void showAvailableClients(ArrayList<Person> list){
+        int i = 0;
+        for (Person anyperson : list){
+            i++;
+            System.out.print("\nClient #"+i);
+            System.out.printf("\nID: %s   Full name: %s   \n",anyperson.getID(),anyperson.getName());
+        }
     }
 
     public void showSlaves(){
@@ -210,13 +408,6 @@ public class Functions {
         }
     }
 
-    public void showGuides(){
-
-    }
-
-    public void showTechnicians(){
-        
-    }
 
     public String setDate (){
         String date = "";
