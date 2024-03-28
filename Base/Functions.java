@@ -115,7 +115,9 @@ public class Functions {
     public void registerTour(){
         boolean guideFound = false;
         ArrayList<Worker> guides = new ArrayList<Worker>();
-        ArrayList<Person> avClients = Clients.clientList;
+        ArrayList<Person> avClients = new ArrayList<Person>();
+        avClients.addAll(Clients.clientList);
+
         for (Worker worker : Workers.workerList){
             if (worker.getRole().equals("Guide")) {
                 guideFound = true;
@@ -178,27 +180,31 @@ public class Functions {
                                     sc.nextLine();
                                 }
                             } while (!flag);
-                            flag = true;
+                            flag = false;
                             if (v < 1 || v > avClients.size()) {
                                 System.out.println("Out of bonds");
                             }
                         } while (v < 1 || v > avClients.size());
 
-                        int year = Integer.parseInt((avClients.get(v-1).getBirthday()).substring(avClients.get(v-1).getBirthday().lastIndexOf("/")));
-                        System.out.println(year);
+                        int aux = avClients.get(v-1).getBirthday().lastIndexOf("/");
+                        int year = Integer.parseInt(avClients.get(v-1).getBirthday().substring(aux+1));
 
                         if ((2024-year)>17){
                             adults++;
-                            if(((avClients.get(v-1).getNumVisits())%5)==0){
-                                System.out.println((avClients.get(v-1).getNumVisits())%5);
+                            Clients.clientList.get(Clients.clientList.indexOf(avClients.get(v-1))).addVisit();
+                            int visits = avClients.get(v-1).getNumVisits();
+                            System.out.println(visits);
+                            if((visits%5)==0){
                                 money = money + 80;
                             }else {
                                 money = money + 100;
                             }
                         }else if((2024-year)<18){
                             kids++;
-                            if(((avClients.get(v-1).getNumVisits())%5)==0){
-                                System.out.println((avClients.get(v-1).getNumVisits())%5);
+                            Clients.clientList.get(Clients.clientList.indexOf(avClients.get(v-1))).addVisit();
+                            int visits = avClients.get(v-1).getNumVisits();
+                            System.out.println(visits);
+                            if((visits%5)==0){
                                 money = money + 40;
                             }else {
                                 money = money + 50;
@@ -221,8 +227,13 @@ public class Functions {
 
             }while (!flag);
             flag = false;
-        }
+            sc.nextLine();
 
+            System.out.println("Set the date.");
+            String date = setDate();
+            Tour tour = new Tour(guide,visitors,money,date,kids,adults);
+            TourList.tourList.add(tour);
+        }
     }
 
     public void registerMaintenance(){
@@ -551,7 +562,6 @@ public class Functions {
             }
         }
         sc.nextLine();
-        System.out.print(date);
         return date;
     }
 
@@ -570,6 +580,7 @@ public class Functions {
                 }
             }while (!flag);
             flag = false;
+            sc.nextLine();
             if (r<1 || r>4){
                 System.out.println("Out of bonds.");
             }

@@ -48,7 +48,7 @@ public class Menu {
                                 sc.nextLine();
                             }
                         } while (!flag);
-                        flag = false;
+                        flag = false; sc.nextLine();
 
                     switch (i) {
                         case 1 -> {
