@@ -35,6 +35,9 @@ public class Person {
         this.CURP = CURP;
     }
 
+    public void setNumVisits(int numVisits){
+        this.numVisits = numVisits;
+    }
     public void addVisit() {
         numVisits++;
     }

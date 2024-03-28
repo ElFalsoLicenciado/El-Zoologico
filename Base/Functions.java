@@ -45,7 +45,6 @@ public class Functions {
         System.out.print("\nClient's CURP: ");
         String CURP = sc.nextLine();
 
-        sc.nextLine();
         Person client = new Person(name,lastName,birthday,CURP,regDate);
         Clients.clientList.add(client);
     }
@@ -57,7 +56,7 @@ public class Functions {
         do {
             do {
                 try {
-                    System.out.println("Animal's weight");
+                    System.out.print("\nAnimal's weight: ");
                     weight = sc.nextDouble();
                     flag = true;
                 }catch (InputMismatchException e){
@@ -76,7 +75,7 @@ public class Functions {
         do {
             do {
                 try {
-                    System.out.println("Animal's feed frequency: ");
+                    System.out.print("\nAnimal's feed frequency: ");
                     feedFreq = sc.nextInt();
                     flag = true;
                 }catch (InputMismatchException e){
@@ -287,7 +286,7 @@ public class Functions {
                 do {
                     try {
                         showSpecificWorkers(technicians);
-                        System.out.print("Select an technician: ");
+                        System.out.print("Select a technician: ");
                         t = sc.nextInt();
                         flag = true;
                     } catch (InputMismatchException e) {
@@ -307,7 +306,7 @@ public class Functions {
                 do {
                     try {
                         showAnimals();
-                        System.out.print("Select an technician: ");
+                        System.out.print("Select an animal: ");
                         a = sc.nextInt();
                         flag = true;
                     } catch (InputMismatchException e) {
@@ -331,7 +330,7 @@ public class Functions {
             int i = 0;
                 do {
                     try {
-                        System.out.println("Any comments?\n 1. Yes 0. No");
+                        System.out.println("Any comments?\n1. Yes 0. No");
                         System.out.print("\nInput: ");
                         i = sc.nextInt();
                         flag = true;
@@ -347,9 +346,7 @@ public class Functions {
                         System.out.println("Write the comment");
                         comments = sc.nextLine();
                     }
-                    case 0 -> {
-                        comments = "None";
-                    }
+                    case 0 -> comments = "None";
                 }
 
                 sc.nextLine();
@@ -357,6 +354,377 @@ public class Functions {
             MaintenanceList.maintenanceList.add(maintenance);
         }
     }
+
+    public void modifyWorker(){
+        if (!Workers.workerList.isEmpty()) {
+            int w = 0;
+            do {
+                do {
+                    try {
+                        showSlaves();
+                        System.out.print("\nSelect a worker: ");
+                        w = sc.nextInt();
+                        flag = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input.");
+                        sc.nextLine();
+                    }
+                }while (!flag);
+                flag = false;sc.nextLine();
+                if (w < 1 || w > Workers.workerList.size()) {
+                    System.out.println("Out of bonds.");
+                }
+            }while (w<1 || w>Workers.workerList.size());
+
+            int c = 0;
+            do {
+                do {
+                    do {
+                        try {
+                            System.out.print("\n1. Change ID\n2.Change full name\n3.Change birthday\n4.Change date of registry\n5.Change CURP\n6.Change RFC\n7.Change wage\n8.Change schedule\n9.Change role\n0. Return");
+                            System.out.print("\nInput: ");
+                            c = sc.nextInt();
+                            flag = true;
+                        }catch (InputMismatchException e) {
+                            System.out.println("Invalid input.");
+                            sc.nextLine();
+                        }
+                    } while (!flag);
+                    flag = false; sc.nextLine();
+                    if (c<0 || c>9){
+                        System.out.println("Out of bonds.");
+                    }
+                }while (c<0 || c>9);
+
+                switch (c){
+                    case 1 -> {
+                        Workers.workerList.get(w-1).setID();
+                        System.out.println("New ID: "+Workers.workerList.get(w-1).getID());
+                    }
+                    case 2 -> {
+                        System.out.print("\nWrite the worker's new name: ");
+                        String name = sc.nextLine();
+                        System.out.print("\nWrite the worker's new last name: ");
+                        String lastName = sc.nextLine();
+                        Workers.workerList.get(w-1).setName(name,lastName);
+                    }
+                    case 3 -> {
+                        System.out.println("Worker's new birthday.");
+                        String birthday = setDate();
+                        Workers.workerList.get(w - 1).setBirthday(birthday);
+                    }
+                    case 4 -> {
+                        System.out.println("Worker's new registry date.");
+                        String regDate = setDate();
+                        Workers.workerList.get(w - 1).setDateOfRegister(regDate);
+                    }
+                    case 5 -> {
+                        System.out.print("\nWorker's new CURP: ");
+                        String CURP = sc.nextLine();
+                        Workers.workerList.get(w - 1).setCURP(CURP);
+                    }
+                    case 6 -> {
+                        System.out.print("\nWorker's new RFC: ");
+                        String RFC = sc.nextLine();
+                        Workers.workerList.get(w - 1).setRFC(RFC);
+                    }
+                    case 7 -> {
+                        int wage = 0;
+                        do {
+                            do {
+                                try {
+                                    System.out.print("\nWorker's new wage: $");
+                                    wage = sc.nextInt();
+                                    flag = true;
+                                }catch (InputMismatchException e){
+                                    System.out.println("Invalid input");
+                                    sc.nextLine();
+                                }
+                            }while (!flag);
+                            flag = false; sc.nextLine();
+                        }while (wage<1);
+
+                        Workers.workerList.get(w - 1).setWage(wage);
+                    }
+                    case 8 -> {
+                        System.out.print("\nWorker's new schedule: ");
+                        String schedule = sc.nextLine();
+                        Workers.workerList.get(w - 1).setSchedule(schedule);
+                    }
+                    case 9 -> {
+                        System.out.println("Worker's new role.");
+                        String role = setRole();
+                        Workers.workerList.get(w - 1).setRole(role);
+                    }
+                    case 0 -> System.out.println("Cheers");
+                }
+            }while (c!=0);
+        }else{
+            System.out.println("There's no workers registered.");
+        }
+    }
+
+    public void modifyClient(){
+        if (!Clients.clientList.isEmpty()) {
+            int cl = 0;
+            do {
+                do {
+                    try {
+                        showClients();
+                        System.out.print("\nSelect a client: ");
+                        cl = sc.nextInt();
+                        flag = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input.");
+                        sc.nextLine();
+                    }
+                }while (!flag);
+                flag = false;sc.nextLine();
+                if (cl<1 || cl>Clients.clientList.size()) {
+                    System.out.println("Out of bonds.");
+                }
+            }while (cl<1 || cl>Clients.clientList.size());
+
+            int c = 0;
+            do {
+                do {
+                    do {
+                        try {
+                            System.out.print("\n1. Change ID\n2.Change full name\n3.Change birthday\n4.Change CURP\n5.Change number of visits\n6.Change date of register\n0. Return");
+                            System.out.print("\nInput: ");
+                            c = sc.nextInt();
+                            flag = true;
+                        }catch (InputMismatchException e) {
+                            System.out.println("Invalid input.");
+                            sc.nextLine();
+                        }
+                    } while (!flag);
+                    flag = false; sc.nextLine();
+                    if (c<0 || c>6){
+                        System.out.println("Out of bonds.");
+                    }
+                }while (c<0 || c>6);
+
+                switch (c){
+                    case 1 -> {
+                        Clients.clientList.get(cl - 1).setID();
+                        System.out.print("\nNew ID: " + Clients.clientList.get(cl - 1).getID());
+                    }
+                    case 2 -> {
+                        System.out.print("\nClient's new name: ");
+                        String name = sc.nextLine();
+                        System.out.print("\nClient's new last name: ");
+                        String lastName = sc.nextLine();
+                        Clients.clientList.get(cl - 1).setName(name,lastName);
+                    }
+                    case 3 -> {
+                        System.out.println("Client's new birthday.");
+                        String birthday = setDate();
+                        Clients.clientList.get(cl - 1).setBirthday(birthday);
+                    }
+                    case 4 -> {
+                        System.out.print("\nClient's new CURP: ");
+                        String CURP = sc.nextLine();
+                        Clients.clientList.get(cl - 1).setCURP(CURP);
+                    }
+                    case 5 -> {
+                        int visits = 0;
+                        do {
+                            do {
+                                try {
+                                    System.out.print("\nClient's visits: $");
+                                    visits = sc.nextInt();
+                                    flag = true;
+                                }catch (InputMismatchException e){
+                                    System.out.println("Invalid input");
+                                    sc.nextLine();
+                                }
+                            }while (!flag);
+                            flag = false; sc.nextLine();
+                            if (visits<0){
+                                System.out.println("Invalid number of visits.");
+                            }
+                        }while (visits<0);
+                        Clients.clientList.get(cl-1).setNumVisits(visits);
+                    }
+                    case 6 -> {
+                        System.out.println("Client's new registry date.");
+                        String regDate = setDate();
+                        Clients.clientList.get(cl - 1).setDateOfRegister(regDate);
+                    }
+                    case 0 -> System.out.println("Cheers");
+                }
+            }while (c!=0);
+        }else{
+            System.out.println("There's no clients registered.");
+        }
+    }
+
+    public void modifyAnimal(){
+        if (!Animals.animalList.isEmpty()) {
+            int a = 0;
+            do {
+                do {
+                    try {
+                        showAnimals();
+                        System.out.print("\nSelect an animal: ");
+                        a = sc.nextInt();
+                        flag = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input.");
+                        sc.nextLine();
+                    }
+                }while (!flag);
+                flag = false;sc.nextLine();
+                if (a<1 || a>Animals.animalList.size()) {
+                    System.out.println("Out of bonds.");
+                }
+            }while (a<1 || a>Animals.animalList.size());
+
+            int c = 0;
+            do {
+                do {
+                    do {
+                        try {
+                            System.out.print("\n1.Change ID\n2. Change type\n3. Change date of arrival\n4. Change weight\n5. Manage diseases\n6. Change feed type\n7. Change feed frequency\n8. Set diseases\n0. Return");
+                            System.out.print("\nInput: ");
+                            c = sc.nextInt();
+                            flag = true;
+                        }catch (InputMismatchException e) {
+                            System.out.println("Invalid input.");
+                            sc.nextLine();
+                        }
+                    } while (!flag);
+                    flag = false; sc.nextLine();
+                    if (c<0 || c>8){
+                        System.out.println("Out of bonds.");
+                    }
+                }while (c<0 || c>8);
+
+                switch (c){
+                    case 1 -> {
+                        Animals.animalList.get(a - 1).setID();
+                        System.out.print("\nNew ID: " + Animals.animalList.get(a - 1).getID());
+                    }
+                    case 2 -> {
+                        System.out.print("\nAnimal's new type: ");
+                        String type = sc.nextLine();
+                        Animals.animalList.get(a - 1).setType(type);
+                    }
+                    case 3 -> {
+                        System.out.println("Animal's new date of arrival.");
+                        String arrDate = setDate();
+                        Animals.animalList.get(a - 1).setDateOfArrival(arrDate);
+                    }
+                    case 4 -> {
+                        double weight = 0;
+                        do {
+                            do {
+                                try {
+                                    System.out.print("\nAnimal's new weight: ");
+                                    weight = sc.nextDouble();
+                                    flag = true;
+                                }catch (InputMismatchException e){
+                                    System.out.println("Invalid input");
+                                    sc.nextLine();
+                                }
+                            }while (!flag);
+                            flag = false; sc.nextLine();
+                            if (weight<0){
+                                System.out.println("Invalid weight.");
+                            }
+                        }while (weight<0);
+                        Animals.animalList.get(a-1).setWeight(weight);
+                    }
+                    case 5 -> {
+                        System.out.println("5");
+                    }
+                    case 6 -> {
+                        System.out.print("\nAnimal's new feed type: ");
+                        String feedType = sc.nextLine();
+                        Animals.animalList.get(a-1).setFeedType(feedType);
+                    }
+                    case 7 -> {
+                        int d = 0;
+                        do {
+                            do {
+                                do {
+                                    try {
+                                        System.out.print("\n1. Register disease 2. Dismiss disease\nInput: ");
+                                        d = sc.nextInt();
+                                        flag = true;
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("Invalid input.");
+                                        sc.nextLine();
+                                    }
+                                } while (!flag);
+                                flag = false; sc.nextLine();
+                                if (d<0 || d>1){
+                                    System.out.println("Out of bonds.");
+                                }
+                            }while (d<0 || d>2);
+
+                            switch (d){
+                                case 1 -> {
+                                    System.out.println("\nDisease to add: ");
+                                    String disease = sc.nextLine();
+                                    Animals.animalList.get(a-1).addDisease(disease);
+                                }
+                                case 2 -> {
+                                    if (!Animals.animalList.get(a-1).getDiseases().isEmpty()){
+                                        int rd = 0;
+                                        do {
+                                            do {
+                                                try {
+                                                    System.out.print("\nDisease to dismiss: ");
+                                                    Animals.animalList.get(a-1).showDiseases();
+                                                    rd = sc.nextInt();
+                                                    flag = true;
+                                                }catch (InputMismatchException e){
+                                                    System.out.println("Invalid input");
+                                                    sc.nextLine();
+                                                }
+                                            }while (!flag);
+                                            flag = false; sc.nextLine();
+                                            if (rd<1 || rd>Animals.animalList.get(a-1).getDiseases().size()){
+                                                System.out.println("Out of bonds.");
+                                            }
+                                        }while (rd<1 || rd>Animals.animalList.get(a-1).getDiseases().size());
+                                        Animals.animalList.get(a-1).removeDisease(rd-1);
+                                    }else{
+                                        System.out.println("There's no disease to remove.");
+                                    }
+                                }
+                            }
+
+                        }while (d!=0);
+                    }
+                    case 8 -> {
+                        boolean vac;
+                        int v = 0;
+                        do {
+                            try {
+                                System.out.println("Is the animal vaccinated?\n1. Yes 2. No");
+                                v = sc.nextInt();
+                            }catch (InputMismatchException e){
+                                System.out.println("Invalid input.");
+                                sc.nextLine();
+                            }
+                        }while (v<0 || v>1);
+                        sc.nextLine();
+                        vac = v != 0;
+                        Animals.animalList.get(a-1).setVaccines(vac);
+                    }
+                    case 0 -> {
+                        System.out.println("Cheers");
+                    }
+                }
+            }while (c!=0);
+        }else{
+            System.out.println("There's no animals registered.");
+        }
+    }
+
 
     public void showSpecificWorkers(ArrayList<Worker> list){
         int i = 0;

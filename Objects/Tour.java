@@ -1,16 +1,15 @@
 package Objects;
 
-import Objects.Person;
 import java.util.ArrayList;
 
 public class Tour {
 
-    private String guide;
+    private final String guide;
     private ArrayList<String> visitors = new ArrayList<String>();
-    private int money;
-    private String date;
-    private int kidsAmount;
-    private int adultsAmount;
+    private final int money;
+    private final String date;
+    private final int kidsAmount;
+    private final int adultsAmount;
 
     public Tour(String guide, ArrayList<String> visitors, int money, String date, int kidsAmount, int adultsAmount) {
         this.guide = guide;

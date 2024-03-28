@@ -103,12 +103,12 @@ public class Menu {
                         switch (i) {
                             case 1 -> {
                                 System.out.println("Modifying a worker");
-
+                                zoo.modifyWorker();
                                 i=0;
                             }
                             case 2 -> {
                                 System.out.println("Modifying a client");
-
+                                zoo.modifyClient();
                                 i=0;
                             }
                             case 3 -> {

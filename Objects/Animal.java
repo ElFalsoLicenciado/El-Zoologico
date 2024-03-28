@@ -58,6 +58,14 @@ public class Animal {
         return diseases;
     }
 
+    public void showDiseases(){
+        int d=0;
+        for (String disease : diseases){
+            d++;
+            System.out.println("Disease #"+d+": "+disease);
+        }
+    }
+
     public void removeDisease(int i){
         diseases.remove(i);
     }
