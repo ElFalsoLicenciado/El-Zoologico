@@ -106,17 +106,29 @@ public class Functions {
                 sc.nextLine();
             }
         }while (v<0 || v>1);
-            if (v==0){
-                 vac = false;
-            }else {
-                 vac = true;
-            }
+            vac = v != 0;
 
             Animal animal = new Animal(type,arrDate,weight,diseases,feedFreq,feedType,vac);
             Animals.animalList.add(animal);
     }
 
     public void registerTour(){
+        boolean guideFound = false;
+        for (Worker worker : Workers.workerList){
+            if (worker.getRole().equals("Technician")) {
+                guideFound = true;
+                break;
+            }
+        }
+        if(!guideFound && Clients.clientList.isEmpty()){
+            System.out.println("There's no guides neither clients available.");
+        }else if(!guideFound){
+            System.out.println("There's no guides available,");
+        }else if (Clients.clientList.isEmpty()){
+            System.out.println("There's no clients available.");
+        } else {
+
+        }
 
     }
 
@@ -177,8 +189,8 @@ public class Functions {
             int i = 0;
             for(Tour anytour : TourList.tourList){
                 i++;
-                System.out.print("\nTour #"+i);
-                anytour.getDetails();
+                System.out.print("\nTour #" + i);
+                System.out.println(anytour.getDetails());
             }
             System.out.println();
         }
@@ -192,12 +204,19 @@ public class Functions {
             for(Maintenance anymaintenance : MaintenanceList.maintenanceList){
                 i++;
                 System.out.print("\nMaintenance #"+i);
-                anymaintenance.getDetails();
+                System.out.println(anymaintenance.getDetails());
             }
             System.out.println();
         }
     }
 
+    public void showGuides(){
+
+    }
+
+    public void showTechnicians(){
+        
+    }
 
     public String setDate (){
         String date = "";
