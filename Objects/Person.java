@@ -50,7 +50,6 @@ public class Person {
     public void setID(){
         int x = birthday.lastIndexOf("/");
         int year = Integer.parseInt(birthday.substring(x+1));
-        System.out.println(year);
         if((2024-year)>17){
             ID = "CA" + UUID.randomUUID().toString().substring(2,12);
         }else if((2024-year)<18){

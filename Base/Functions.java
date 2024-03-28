@@ -40,11 +40,12 @@ public class Functions {
         String lastName = sc.nextLine();
         System.out.print("\nClient's birthday: ");
         String birthday = setDate();
-        System.out.print("\nClient's CURP: ");
-        String CURP = sc.nextLine();
         System.out.print("\nSet the date of register: ");
         String regDate = setDate();
+        System.out.print("\nClient's CURP: ");
+        String CURP = sc.nextLine();
 
+        sc.nextLine();
         Person client = new Person(name,lastName,birthday,CURP,regDate);
         Clients.clientList.add(client);
     }
@@ -52,15 +53,40 @@ public class Functions {
     public void registerAnimal(){
         System.out.print("\nAnimal's type: ");
         String type = sc.nextLine();
-        System.out.print("\nAnimal's weight: ");
-        double weight = sc.nextDouble();
+        double weight=0;
+        do {
+            do {
+                try {
+                    System.out.println("Animal's weight");
+                    weight = sc.nextDouble();
+                    flag = true;
+                }catch (InputMismatchException e){
+                    System.out.println("Invalid input.");
+                    sc.nextLine();
+                }
+            }while (!flag);
+            flag = false; sc.nextLine();
+        }while(weight<0);
+
         System.out.print("\nAnimal's date of arrival: ");
         String arrDate= setDate();
         System.out.print("\nAnimal's feed type: ");
         String feedType = sc.nextLine();
-        System.out.print("\nAnimal's feed frequency: ");
-        int feedFreq = sc.nextInt();
-        sc.nextLine();
+        int feedFreq=0;
+        do {
+            do {
+                try {
+                    System.out.println("Animal's feed frequency: ");
+                    feedFreq = sc.nextInt();
+                    flag = true;
+                }catch (InputMismatchException e){
+                    System.out.println("Invalid input.");
+                    sc.nextLine();
+                }
+            }while (!flag);
+            flag = false; sc.nextLine();
+        }while(feedFreq<0);
+
 
         ArrayList<String> diseases = new ArrayList<>();
         int d = 0;
@@ -108,6 +134,7 @@ public class Functions {
         }while (v<0 || v>1);
             vac = v != 0;
 
+            sc.nextLine();
             Animal animal = new Animal(type,arrDate,weight,diseases,feedFreq,feedType,vac);
             Animals.animalList.add(animal);
     }
@@ -168,55 +195,58 @@ public class Functions {
                 }
                 switch (x){
                     case 1 -> {
-                        do {
+                        if (!avClients.isEmpty()) {
                             do {
-                                try {
-                                    showAvailableClients(avClients);
-                                    System.out.print("Select a visitor: ");
-                                    v = sc.nextInt();
-                                    flag = true;
-                                } catch (InputMismatchException e) {
-                                    System.out.println("Invalid input.");
-                                    sc.nextLine();
+                                do {
+                                    try {
+                                        showAvailableClients(avClients);
+                                        System.out.print("Select a visitor: ");
+                                        v = sc.nextInt();
+                                        flag = true;
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("Invalid input.");
+                                        sc.nextLine();
+                                    }
+                                } while (!flag);
+                                flag = false;
+                                if (v < 1 || v > avClients.size()) {
+                                    System.out.println("Out of bonds");
                                 }
-                            } while (!flag);
-                            flag = false;
-                            if (v < 1 || v > avClients.size()) {
-                                System.out.println("Out of bonds");
-                            }
-                        } while (v < 1 || v > avClients.size());
+                            } while (v < 1 || v > avClients.size());
 
-                        int aux = avClients.get(v-1).getBirthday().lastIndexOf("/");
-                        int year = Integer.parseInt(avClients.get(v-1).getBirthday().substring(aux+1));
+                            int aux = avClients.get(v - 1).getBirthday().lastIndexOf("/");
+                            int year = Integer.parseInt(avClients.get(v - 1).getBirthday().substring(aux + 1));
 
-                        if ((2024-year)>17){
-                            adults++;
-                            Clients.clientList.get(Clients.clientList.indexOf(avClients.get(v-1))).addVisit();
-                            int visits = avClients.get(v-1).getNumVisits();
-                            System.out.println(visits);
-                            if((visits%5)==0){
-                                money = money + 80;
-                            }else {
-                                money = money + 100;
+                            if ((2024 - year) > 17) {
+                                adults++;
+                                Clients.clientList.get(Clients.clientList.indexOf(avClients.get(v - 1))).addVisit();
+                                int visits = avClients.get(v - 1).getNumVisits();
+                                if ((visits % 5) == 0) {
+                                    money = money + 80;
+                                } else {
+                                    money = money + 100;
+                                }
+                            } else if ((2024 - year) < 18) {
+                                kids++;
+                                Clients.clientList.get(Clients.clientList.indexOf(avClients.get(v - 1))).addVisit();
+                                int visits = avClients.get(v - 1).getNumVisits();
+                                if ((visits % 5) == 0) {
+                                    money = money + 40;
+                                } else {
+                                    money = money + 50;
+                                }
                             }
-                        }else if((2024-year)<18){
-                            kids++;
-                            Clients.clientList.get(Clients.clientList.indexOf(avClients.get(v-1))).addVisit();
-                            int visits = avClients.get(v-1).getNumVisits();
-                            System.out.println(visits);
-                            if((visits%5)==0){
-                                money = money + 40;
-                            }else {
-                                money = money + 50;
-                            }
+
+                            visitors.add(avClients.get(v - 1).getName());
+                            avClients.remove(v - 1);
+                            count++;
+                        }else {
+                            System.out.println("There's no clients available.");
+                            flag = true;
                         }
-
-                        visitors.add(avClients.get(v-1).getName());
-                        avClients.remove(v-1);
-                        count++;
                     }
                     case 0 ->{
-                        if (count<0){
+                        if (count<1){
                             System.out.println("Add at least one visitor.");
                         }else {
                             flag = true;
@@ -321,6 +351,8 @@ public class Functions {
                         comments = "None";
                     }
                 }
+
+                sc.nextLine();
             Maintenance maintenance = new Maintenance(technician,animalID,process,date,comments);
             MaintenanceList.maintenanceList.add(maintenance);
         }
