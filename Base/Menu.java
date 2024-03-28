@@ -113,7 +113,7 @@ public class Menu {
                             }
                             case 3 -> {
                                 System.out.println("Modifying an animal");
-
+                                zoo.modifyAnimal();
                                 i=0;
                             }
                             case 0 -> System.out.println("Returning");
@@ -144,17 +144,17 @@ public class Menu {
                         switch (i) {
                             case 1 -> {
                                 System.out.println("Removing a worker");
-
+                                zoo.removeWorker();
                                 i=0;
                             }
                             case 2 -> {
                                 System.out.println("Removing a client");
-
+                                zoo.removeClient();
                                 i=0;
                             }
                             case 3 -> {
                                 System.out.println("Removing an animal");
-
+                                zoo.removeAnimal();
                                 i=0;
                             }
                             case 0 -> System.out.println("Returning");

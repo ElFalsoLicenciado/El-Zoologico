@@ -637,14 +637,6 @@ public class Functions {
                         Animals.animalList.get(a-1).setWeight(weight);
                     }
                     case 5 -> {
-                        System.out.println("5");
-                    }
-                    case 6 -> {
-                        System.out.print("\nAnimal's new feed type: ");
-                        String feedType = sc.nextLine();
-                        Animals.animalList.get(a-1).setFeedType(feedType);
-                    }
-                    case 7 -> {
                         int d = 0;
                         do {
                             do {
@@ -699,6 +691,31 @@ public class Functions {
 
                         }while (d!=0);
                     }
+                    case 6 -> {
+                        System.out.print("\nAnimal's new feed type: ");
+                        String feedType = sc.nextLine();
+                        Animals.animalList.get(a-1).setFeedType(feedType);
+                    }
+                    case 7 -> {
+                        int feedFrequency = 0;
+                        do {
+                            do {
+                                try {
+                                    System.out.print("\nAnimal's feed frequency: ");
+                                    feedFrequency = sc.nextInt();
+                                    flag = true;
+                                }catch (InputMismatchException e){
+                                    System.out.println("Invalid input");
+                                    sc.nextLine();
+                                }
+                            }while (!flag);
+                            flag = false; sc.nextLine();
+                            if (feedFrequency<0){
+                                System.out.println("Invalid number.");
+                            }
+                        }while (feedFrequency<0);
+                        Animals.animalList.get(a-1).setFeedFrequency(feedFrequency);
+                    }
                     case 8 -> {
                         boolean vac;
                         int v = 0;
@@ -711,17 +728,94 @@ public class Functions {
                                 sc.nextLine();
                             }
                         }while (v<0 || v>1);
-                        sc.nextLine();
                         vac = v != 0;
+                        sc.nextLine();
                         Animals.animalList.get(a-1).setVaccines(vac);
                     }
-                    case 0 -> {
-                        System.out.println("Cheers");
-                    }
+                    case 0 -> System.out.println("Cheers");
                 }
             }while (c!=0);
         }else{
             System.out.println("There's no animals registered.");
+        }
+    }
+
+    public void removeWorker(){
+        if (!Workers.workerList.isEmpty()){
+        int w = 0;
+        do {
+            do {
+                try {
+                    showSlaves();
+                    System.out.print("\nSelect a worker: ");
+                    w = sc.nextInt();
+                    flag = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input");
+                    sc.nextLine();
+                }
+            } while (!flag);
+            flag = false; sc.nextLine();
+            if (w < 1 || w > Workers.workerList.size()) {
+                System.out.println("Out of bonds.");
+            }
+        } while (w < 1 || w > Workers.workerList.size());
+        Workers.workerList.remove(w-1);
+        }else {
+            System.out.println("There's no worker registered.");
+        }
+    }
+
+
+    public void removeClient(){
+        if (!Clients.clientList.isEmpty()){
+            int cl = 0;
+            do {
+                do {
+                    try {
+                        showClients();
+                        System.out.print("\nSelect a client: ");
+                        cl = sc.nextInt();
+                        flag = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input");
+                        sc.nextLine();
+                    }
+                } while (!flag);
+                flag = false; sc.nextLine();
+                if (cl < 1 || cl > Clients.clientList.size()) {
+                    System.out.println("Out of bonds.");
+                }
+            } while (cl < 1 || cl > Clients.clientList.size());
+            Clients.clientList.remove(cl-1);
+        }else {
+            System.out.println("There's no client registered.");
+        }
+    }
+
+    public void removeAnimal(){
+        if (!Animals.animalList.isEmpty()){
+            int a = 0;
+            do {
+                do {
+                    try {
+                        showAnimals();
+                        System.out.print("\nSelect an animal: ");
+                        a = sc.nextInt();
+                        flag = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input");
+                        sc.nextLine();
+                    }
+                } while (!flag);
+                flag = false; sc.nextLine();
+                if (a < 1 || a > Animals.animalList.size()) {
+                    System.out.println("Out of bonds.");
+                }
+            } while (a < 1 || a > Animals.animalList.size());
+            Animals.animalList.remove(a-1);
+        }else {
+            System.out.println("There's no animal registered.");
         }
     }
 
@@ -774,20 +868,24 @@ public class Functions {
     }
 
     public void showAnimals(){
-        int i = 0;
-        for (Animal anyanimal : Animals.animalList){
-            i++;
-            System.out.print("\nAnimal #" + i);
-            System.out.printf("\nID %s   Type: %s   Weight: %s   Date of arrival %s   Feed type: %s   Feed frequency: %s times/day   Vaccines: %s   \n",anyanimal.getID(),anyanimal.getType(),anyanimal.getWeight(),anyanimal.getDateOfArrival(),anyanimal.getFeedType(),anyanimal.getFeedFrequency(),anyanimal.isVaccinated());
-            if(anyanimal.getDiseases().isEmpty()){
-                System.out.println("The animal is healthy.\n");
-            }else {
-                System.out.print("Current diseases: ");
-                for (int d = 0; d<anyanimal.getDiseases().size();d++){
-                    System.out.printf("Disease #%d: %s ",d+1,anyanimal.getDiseases().get(d));
+        if (!Animals.animalList.isEmpty()) {
+            int i = 0;
+            for (Animal anyanimal : Animals.animalList) {
+                i++;
+                System.out.print("\nAnimal #" + i);
+                System.out.printf("\nID %s   Type: %s   Weight: %s   Date of arrival %s   Feed type: %s   Feed frequency: %s times/day   Vaccines: %s   \n", anyanimal.getID(), anyanimal.getType(), anyanimal.getWeight(), anyanimal.getDateOfArrival(), anyanimal.getFeedType(), anyanimal.getFeedFrequency(), anyanimal.isVaccinated());
+                if (anyanimal.getDiseases().isEmpty()) {
+                    System.out.println("The animal is healthy.\n");
+                } else {
+                    System.out.print("Current diseases: ");
+                    for (int d = 0; d < anyanimal.getDiseases().size(); d++) {
+                        System.out.printf("Disease #%d: %s ", d + 1, anyanimal.getDiseases().get(d));
+                    }
+                    System.out.println();
                 }
-                System.out.println();
             }
+        }else {
+            System.out.println("There's no animals registered");
         }
     }
 
