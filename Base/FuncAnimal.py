@@ -85,7 +85,7 @@ class Funtions_animal:
                         weight = 0.0
                         while weight <= 0 :
                             weight = float(input("\nAnimal's new weight: "))
-                            if weight >= 0:
+                            if weight > 0:
                                 Animal.Animal.__set_weight(AnimalRepo.Animals.animal_list[a-1], weight)
                                 break
                             else:

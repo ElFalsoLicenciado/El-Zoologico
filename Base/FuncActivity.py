@@ -62,7 +62,7 @@ class Functions_activities:
                             if ine == "C" :
                                 adults = adults + 1
                                 Person.add_visit(ClientRepo.Clients.client_list[b-1])
-                                visits = Person.get_visits(ClientRepo.Clients.client_list[b-1])
+                                visits = Person.Person.__get_num_visits(ClientRepo.Clients.client_list[b-1])
                                 if visits%5 == 0 :
                                     money = money + 40
                                 else:
