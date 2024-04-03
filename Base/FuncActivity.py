@@ -8,18 +8,18 @@ class Functions_activities:
         guide_found = False
         guides = []
         av_clients = []
-        av_clients = ClientRepo.client_list
+        av_clients = ClientRepo.Clients.client_list
 
-        for worker in WorkerRepo.worker_list:
+        for worker in WorkerRepo.Workers.worker_list:
             if worker.__get_role() == "Guide":
                 guide_found = True
                 guides.add(worker)
 
-        if guide_found == False and not ClientRepo.client_list :
+        if guide_found == False and not ClientRepo.Clients.client_list :
             print("There's no guides neither clients available")
         elif guide_found == False :
             print("There's is no guides available")
-        elif not ClientRepo.client_list :
+        elif not ClientRepo.Clients.client_list :
             print("There's no clients available")
         else :
             visitors = []
@@ -28,12 +28,12 @@ class Functions_activities:
             money = 0
             g = 0
             while True :
-                show_specific_workers(guides)
+                Functions_activities.__show_specific_workers(guides)
                 g = input("Select a guide")
                 if g < 1 and g > len(guides)+1 :
                     print("Invalid input")
                 else:
-                    guide = Worker.get_name(guides[g-1])
+                    guide = Worker.Worker.__get_name(guides[g-1])
                     break
             count = 0
             while True :
@@ -44,30 +44,30 @@ class Functions_activities:
                     if not av_clients:
                         print("There are no clients available")
                     else:
-                        show_available_clients(av_clients)
+                        Functions_activities.__show_available_clients(av_clients)
                         b = input("Select a visitor: ")
                         if b < 1 and b > len(guides)+1 :
                             print("Invalid input")
                         else:
-                            aux = Person.get_id(ClientRepo.client_list[b-1])
+                            aux = Person.Person.__get_id(ClientRepo.Clients.client_list[b-1])
                             ine = aux[1]
                             if ine == "A" :
                                 adults = adults + 1
-                                Person.add_visit(ClientRepo.client_list[b-1])
-                                visits = Person.get_visits(ClientRepo.client_list[b-1])
+                                Person.Person.__add_visit(ClientRepo.Clients.client_list[b-1])
+                                visits = Person.Person.__get_num_visits(ClientRepo.Clients.client_list[b-1])
                                 if visits%5 == 0 :
                                     money = money + 80
                                 else:
                                     money = money + 100
                             if ine == "C" :
                                 adults = adults + 1
-                                Person.add_visit(ClientRepo.client_list[b-1])
-                                visits = Person.get_visits(ClientRepo.client_list[b-1])
+                                Person.add_visit(ClientRepo.Clients.client_list[b-1])
+                                visits = Person.get_visits(ClientRepo.Clients.client_list[b-1])
                                 if visits%5 == 0 :
                                     money = money + 40
                                 else:
                                     money = money + 50
-                            visitors.add(Person.get_name(av_clients(b-1)))
+                            visitors.add(Person.Person.__get_name(av_clients(b-1)))
                             av_clients.remove(b-1)
                             count = count + 1
                 elif g == 0 :
@@ -77,46 +77,46 @@ class Functions_activities:
                         break
             print("Set the date.")
             date = " "
-            date = Functions.set_date()
-            tour = Tour(guide, visitors, money, date, kids, adults)
-            TourRepo.tour_list.add(tour)
+            date = Functions.Funtions.__set_date()
+            tour = Tour.Tour(guide, visitors, money, date, kids, adults)
+            TourRepo.Tour_list.tour_list.add(tour)
     
     def __register_maintenance():
         tech_found = False
         technicians = []
-        for worker in WorkerRepo.worker_list:
-            if worker.__get_role() == "Technician":
+        for worker in WorkerRepo.Workers.worker_list:
+            if worker.Worker.__get_role() == "Technician":
                 tech_found = True
                 technicians.add(worker)
-        if tech_found == False and not AnimalRepo.animal_list :
+        if tech_found == False and not AnimalRepo.Animals.animal_list :
             print("There's neither technicians neither animals available.")
         elif tech_found == False :
             print("There's no technicians available.")
-        elif not AnimalRepo.animal_list :
+        elif not AnimalRepo.Animals.animal_list :
             print("There's no animals available.")
         else :
             g = 0
             while True :
-                show_specific_workers(technicians)
+                Functions_activities.__show_specific_workers(technicians)
                 g = input("Select a technician")
                 if g < 1 and g > len(technicians)+1 :
                     print("Invalid input")
                 else:
-                    technician = Worker.get_name(technicians[g-1])
+                    technician = Worker.Worker.__get_name(technicians[g-1])
                     break
             t=0
             while True :
-                Functions.show_animals()
+                Functions.Functions.__show_animals()
                 t = input("Select an animal: ")
-                if t < 1 and t > len(AnimalRepo.animal_list)+1 :
+                if t < 1 and t > len(AnimalRepo.Animals.animal_list)+1 :
                     print("Invalid input")
                 else:
-                    animal_id = Animal.get_id(AnimalRepo.animal_list[t-1])
+                    animal_id = Animal.Animal.__get_id(AnimalRepo.Animals.animal_list[t-1])
                     break
 
             process = input("\nWrite the process: ")
             print("Set the date: ")
-            date = Functions.set_date()
+            date = Functions.Funtions.__set_date()
 
             comments = " "
             jk = 0
@@ -130,15 +130,15 @@ class Functions_activities:
                     comments = "None"
                     break
             
-            maintenance = Maintenance(technician, animal_id, process, date, comments)
-            MaintenanceRepo.maintenance_list.add(maintenance)
+            maintenance = Maintenance.Maintenance(technician, animal_id, process, date, comments)
+            MaintenanceRepo.Maintenance_list.maintenance_list.add(maintenance)
 
     def __show_specific_workers(list):
         i = 0
         for anyworker in list :
             i = i + 1
-            print("\n"+ Worker.get_role(anyworker) + " #"+ i)
-            print("\nID: " + Worker.get_id(anyworker) + "  Full name: " + Worker.get_name(anyworker)+ "\n")
+            print("\n"+ Worker.Worker.__get_role(anyworker) + " #"+ i)
+            print("\nID: " + Worker.Worker.__get_id(anyworker) + "  Full name: " + Worker.get_name(anyworker)+ "\n")
         print(" ")    
 
     def __show_available_clients(list):
@@ -146,7 +146,7 @@ class Functions_activities:
         for anyperson in list:
             i = i + 1
             print("\nClient #"+ i)
-            print("\nID: " + anyperson.Person.__get_id + "  Full name: " + Person.get_name(anyperson)+ "\n")
+            print("\nID: " + Person.Person.__get_id(anyperson) + "  Full name: " + Person.Person.__get_name(anyperson)+ "\n")
         print(" ")  
     
     def __show_tours():

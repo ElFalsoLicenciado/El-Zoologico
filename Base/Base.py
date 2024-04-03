@@ -15,6 +15,6 @@ class Execution:
                 j=j+10
                 print("Access granted, please stand by " + '-'*y + '#'*z + " %" + str(j))
             print("\nYou are in.\n")
-            menu()
+            Menu.__menu()
         else:
             print("Password is incorrect, try again.")

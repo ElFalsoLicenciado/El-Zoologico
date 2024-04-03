@@ -1,12 +1,16 @@
 import uuid
+import Worker, Person, Tour, Maintenance, Animal
+from Storage import WorkerRepo, ClientRepo, TourRepo, MaintenanceRepo, AnimalRepo
+from Base import Functions
 
 class Animal:
+    i = 0
     __id = " "
     __type = " "
     __date_of_arrival = " "
     __weight = " "
     __diseases = []
-    __feed_frequency = 0
+    __feed_frequency = ""
     __feed_type = " "
     __vaccines = False
 
@@ -49,17 +53,17 @@ class Animal:
     def __get_diseases(self):
         return self.__diseases
      
-    def __show_diseases():
+    def __show_diseases(self):
         lol = 0
-        for disease in diseases:
+        for disease in self.__diseases:
             lol = lol + 1
             print("Disease #"+lol+": "+disease)
           
-    def __remove_disease(int(i)):
-        diseases.remove(i);
+    def __remove_disease(self, i):
+        del self.__diseases[i]
 
-    def __add_disease(disease):
-        diseases.add(disease)
+    def __add_disease(self, disease):
+        self.__diseases.add(disease)
 
     def __get_feed_frequency(self):
         return self.__feed_frequency
