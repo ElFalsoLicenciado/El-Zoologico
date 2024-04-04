@@ -1,8 +1,12 @@
-from Modules.Bases import Menu
+from Menu import Menus
+
 
 pass_is_valid = False
 safe_pass = "a"
-menu = Menu.Menus()
+
+pass_is_valid = False
+safe_pass = "a"
+
 while pass_is_valid == False :
     x = input("\nIntroduce the password: ")
     if x == safe_pass:
@@ -14,7 +18,7 @@ while pass_is_valid == False :
             j=j+10
             print("Access granted, please stand by " + '-'*y + '#'*z + " %" + str(j))
         print("\nYou are in.\n")
-        
-        menu.__exec()
+        menu = Menus()
+        menu()
     else:
         print("Password is incorrect, try again.")
