@@ -38,11 +38,12 @@ class Person:
         self.__date_of_register = date_of_register
 
     def __get_id(self):
-        return id
+        return self.__id
     
     def __set_id(self):
         year = 0
-        year = self.__birthday[6:]
+        print(self.__birthday)
+        year = int(self.__birthday[-4:])
         if 2024 - year > 17 : 
             xd = uuid.uuid4()
             id = "CA" + str(xd)
@@ -66,3 +67,8 @@ class Person:
     
     def __get_date_of_register(self):
         return self.__date_of_register
+    
+    def show_client(self):
+        
+        print("\nID: %s   Full name: %s   Birthday: %s  Date of register: %s   CURP: %s   Number of visits %s\n", self.__get_id , self.__get_name, self.__get_birthday, self.__get_date_of_register, self.__get_curp, self.__get_num_visits)
+        anyperson = anyperson + 1

@@ -20,5 +20,5 @@ class Tour:
             kk = " "
             kk = kk + visitor + ", "
         
-        info = kk + "\nTotal in tickets: $" + money + ", date: " + date + ", number of kids: " + kids_amount + ", number of adults: " + adults_amount
+        info = kk + "\nTotal in tickets: $" + str(money) + ", date: " + date + ", number of kids: " + str(kids_amount) + ", number of adults: " + str(adults_amount)
         return info

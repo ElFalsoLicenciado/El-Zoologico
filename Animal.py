@@ -55,13 +55,13 @@ class Animal:
         lol = 0
         for disease in self.__diseases:
             lol = lol + 1
-            print("Disease #"+lol+": "+disease)
+            print("Disease #"+str(lol)+": "+disease)
           
     def __remove_disease(self, i):
         del self.__diseases[i]
 
     def __add_disease(self, disease):
-        self.__diseases.add(disease)
+        self.__diseases.append(disease)
 
     def __get_feed_frequency(self):
         return self.__feed_frequency
@@ -78,5 +78,5 @@ class Animal:
     def __is_vaccinated(self):
         return self.__vaccines
 
-    def set_vaccines(self, vaccines):
+    def __set_vaccines(self, vaccines):
         self.__vaccines = vaccines

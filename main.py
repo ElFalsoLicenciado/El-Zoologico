@@ -19,6 +19,6 @@ while pass_is_valid == False :
             print("Access granted, please stand by " + '-'*y + '#'*z + " %" + str(j))
         print("\nYou are in.\n")
         menu = Menus()
-        menu()
+        
     else:
         print("Password is incorrect, try again.")
