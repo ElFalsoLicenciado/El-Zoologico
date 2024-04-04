@@ -1,5 +1,5 @@
-from Objects import Person
-from Storage import ClientRepo
+from ..Objects import Person
+from ..Storage import ClientRepo
 import Functions
 
 class Functions_client:

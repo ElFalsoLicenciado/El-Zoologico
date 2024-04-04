@@ -1,7 +1,5 @@
 import uuid
-import Worker, Person, Tour, Maintenance, Animal
-from Storage import WorkerRepo, ClientRepo, TourRepo, MaintenanceRepo, AnimalRepo
-from Base import Functions
+
 
 class Animal:
     i = 0

@@ -1,5 +1,5 @@
-from Objects import Worker, Person, Tour, Maintenance, Animal
-from Storage import WorkerRepo, ClientRepo, TourRepo, MaintenanceRepo, AnimalRepo
+from ..Objects import Worker, Person, Animal
+from ..Storage import WorkerRepo, ClientRepo, AnimalRepo
 import FuncActivity, FuncAnimal, FuncClient, FuncWorker
 
 class Functions:

@@ -1,5 +1,5 @@
-from Objects import Animal
-from Storage import AnimalRepo
+from ..Objects import Animal
+from ..Storage import AnimalRepo
 import Functions
 
 class Funtions_animal:
