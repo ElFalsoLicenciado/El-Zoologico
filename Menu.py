@@ -56,7 +56,7 @@ class Menus:
             elif p == 2:
                 i = 0
                 while True:
-                    print("\n1. Modify a worker.\n2. Modify a client. \n3. Modify an animal. \n0. Return.")
+                    print("\n1. Modify a worker.\n2. Modify a client. \n3. Modify an animal. \n0. Return.\n")
                     i = int(input("Input: "))
                     if i == 0:
                         break
@@ -191,24 +191,24 @@ class Menus:
                     if c == 0:
                         break
                     elif c == 1:
-                        Animal.__set_id(Menus.animal_list[a-1])
+                        Animal.set_id(Menus.animal_list[a-1])
                         print("\nNew ID: " + Animal.__get_id(Menus.animal_list[a-1]))
                         break
                     elif c == 2:
                         type = input("\nAnimal's new type: ")
-                        Animal.__set_type(Menus.animal_list[a-1], type)
+                        Animal.set_type(Menus.animal_list[a-1], type)
                         break
                     elif c== 3:
                         print("Animal's new date of arrival: ")
                         arr_date = Menus.__set_date()
-                        Animal.__set_date_of_arrival(Menus.animal_list[a-1], arr_date)
+                        Animal.set_date_of_arrival(Menus.animal_list[a-1], arr_date)
                         break
                     elif c == 4:
                         weight = 0.0
                         while weight <= 0 :
                             weight = float(input("\nAnimal's new weight: "))
                             if weight > 0:
-                                Animal.__set_weight(Menus.animal_list[a-1], weight)
+                                Animal.set_weight(Menus.animal_list[a-1], weight)
                                 break
                             else:
                                 print("Invalid input.")
@@ -241,14 +241,14 @@ class Menus:
                                     break
                     elif c == 6:
                         feed_type = input("\nAnimal's new type: ")
-                        Animal.__set_feed_type(Menus.animal_list[a-1], feed_type)
+                        Animal.set_feed_type(Menus.animal_list[a-1], feed_type)
                         break
                     elif c == 7:
                         feed_freq = ""
                         while feed_freq <= "" :
                             feed_freq = input("\nAnimal's new feed frequency: ")
                             if feed_freq != "":
-                                Animal.__set_feed_frequency(Menus.animal_list[a-1], feed_freq)
+                                Animal.set_feed_frequency(Menus.animal_list[a-1], feed_freq)
                                 break
                             else:
                                 print("Invalid input.")
@@ -265,7 +265,7 @@ class Menus:
                             elif tt == 0 :
                                 vac = False
                                 break
-                        Animal.__set_vaccines(Menus.animal_list[a-1], vac)
+                        Animal.set_vaccines(Menus.animal_list[a-1], vac)
                     else:
                         print("Invalid input.")
 
@@ -287,11 +287,12 @@ class Menus:
         guides = []
         av_clients = []
         av_clients = Menus.client_list
-
-        for worker in Menus.worker_list:
-            if Worker.__get_role(worker) == "Guide":
+        worker = 0
+        for worker in range(len(Menus.worker_list)):
+            if  Worker.get_role(Menus.worker_list[worker]) == "Guide":
                 guide_found = True
                 guides.append(worker)
+            worker = worker + 1
 
         if guide_found == False and not Menus.client_list :
             print("There's no guides neither clients available")
@@ -311,7 +312,7 @@ class Menus:
                 if g < 1 and g > len(guides)+1 :
                     print("Invalid input")
                 else:
-                    guide = Worker.__get_name(guides[g-1])
+                    guide = Worker.get_name(guides[g-1])
                     break
             count = 0
             g = 0
@@ -333,7 +334,7 @@ class Menus:
                             if ine == "A" :
                                 adults = adults + 1
                                 Person.__add_visit(Menus.client_list[b-1])
-                                visits = Person.__get_num_visits(Menus.client_list[b-1])
+                                visits = Person.get_num_visits(Menus.client_list[b-1])
                                 if visits%5 == 0 :
                                     money = money + 80
                                 else:
@@ -341,12 +342,12 @@ class Menus:
                         if ine == "C" :
                             adults = adults + 1
                             Person.append_visit(Menus.client_list[b-1])
-                            visits = Person.__get_num_visits(Menus.client_list[b-1])
+                            visits = Person.get_num_visits(Menus.client_list[b-1])
                             if visits%5 == 0 :
                                 money = money + 40
                             else:
                                 money = money + 50
-                        visitors.append(Person.__get_name(av_clients(b-1)))
+                        visitors.append(Person.get_name(av_clients(b-1)))
                         av_clients.remove(b-1)
                         count = count + 1
                 elif g == 0 :
@@ -413,41 +414,51 @@ class Menus:
             Menus.maintenance_list.append(maintenance)
 
     def __show_specific_workers(self, list):
-        i = 0
-        for anyworker in list :
-            i = i + 1
-            print("\n"+ Worker.__get_role(anyworker) + " #"+ str(i))
-            print("\nID: " + Worker.__get_id(anyworker) + "  Full name: " + Worker.__get_name(anyworker)+ "\n")
+        if not list:
+            print("There isn't any workers of this type registered.")
+        else:
+            i = 0
+            anyworker = 0
+            for anyworker in range(len(Menus.worker_list)):
+                if anyworker in list:
+                    i = i + 1
+                    print("\nWorker #"+str(i))
+                    Worker.show_slave(list[anyworker])
+                anyworker = anyworker + 1
         print(" ")
 
     def __show_available_clients(self, list):
-        i = 0
-        for anyperson in list:
-            i = i + 1
-            print("\nClient #"+ str(i))
-            print("\nID: " + Person.__get_id(anyperson) + "  Full name: " + Person.__get_name(anyperson)+ "\n")
+        if not list:
+            print("There are no clients registered.")
+        else:
+            anyperson = 0
+            for anyperson in range(len(list)):
+                print("\nClient #"+ str(anyperson+1))
+                Person.show_client(list[anyperson])
+                anyperson = anyperson + 1
         print(" ")
+
 
     def __show_tours(self):
         if not Menus.tour_list:
             print("There's no tours registered")
         else:
-            i = 0
-            for anytour in Menus.tour_list:
-                i = i + 1
-                print("\nTour #"+ str(i))
-                print(Tour.__get_details(anytour))
+            anytour = 0
+            for anytour in range(len(Menus.tour_list)):
+                print("\nTour #"+ str(anytour+1))
+                print(Tour.get_details(Menus.tour_list[anytour]))
+                anytour = anytour + 1
             print(" ")
 
     def __show_maintenance(self):
         if not Menus.maintenance_list:
             print("There's no maintenances registered")
         else:
-            i = 0
-            for anymain in Menus.maintenance_list:
-                i = i + 1
-                print("\nTour #"+ str(i))
-                print(Maintenance.__get_details(anymain))
+            anymain = 0
+            for anymain in range(len(Menus.maintenance_list)):
+                print("\nTour #"+ str(anymain+1))
+                print(Maintenance.get_details(Menus.maintenance_list[anymain]))
+                anymain = anymain + 1
             print(" ")
 
     def __register_client(self):
@@ -461,6 +472,7 @@ class Menus:
 
         client = Person(name, last_name, birthday, curp, reg_date)
         Menus.client_list.append(client)
+        print(client.get_curp())
 
     def __modify_client(self):
         if not Menus.client_list:
@@ -482,29 +494,29 @@ class Menus:
                     if c == 0:
                         break
                     elif c == 1:
-                        Person.__set_id(Menus.client_list[cl-1])
+                        Person.set_id(Menus.client_list[cl-1])
                         print("\nNew ID: " + Person.__get_id(Menus.client_list[cl-1]))
                         break
                     elif c == 2:
                         name = input("\nClient's new name: ")
                         last_name = input("\nClient's new last name: ")
-                        Person.__set_name(Menus.client_list[cl-1], name, last_name)
+                        Person.set_name(Menus.client_list[cl-1], name, last_name)
                         break
                     elif c== 3:
                         print("Client's new birthday: ")
                         birthday = Menus.__set_date()
-                        Person.__set_birthday(Menus.client_list[cl-1], birthday)
+                        Person.set_birthday(Menus.client_list[cl-1], birthday)
                         break
                     elif c == 4:
                         curp = input("\nClient's new curp: ")
-                        Person.__set_curp(Menus.client_list[cl-1], curp)
+                        Person.set_curp(Menus.client_list[cl-1], curp)
                         break
                     elif c == 5:
                         visits = 0
                         while True :
                             visits = int(input("\nClient's visits: "))
                             if visits >= 0:
-                                Person.__set_num_visits(Menus.client_list[cl-1], visits)
+                                Person.set_num_visits(Menus.client_list[cl-1], visits)
                                 break
                             else:
                                 print("Invalid input.")
@@ -512,7 +524,7 @@ class Menus:
                     elif c == 6:
                         print("Client's new registry date: ")
                         reg_date = Menus.__set_date()
-                        Person.__set_date_of_register(Menus.client_list[cl-1], reg_date)
+                        Person.set_date_of_register(Menus.client_list[cl-1], reg_date)
                         break
                     else:
                         print("Invalid input.")
@@ -566,52 +578,53 @@ class Menus:
                     if c == 0:
                         break
                     elif c == 1:
-                        Worker.__set_id(Menus.worker_list[cl-1])
-                        print("\nNew ID: " + Worker.__get_id(Menus.worker_list[cl-1]))
+                        Worker.set_id(Menus.worker_list[cl-1])
+                        print("\nNew ID: " + Worker.get_id(Menus.worker_list[cl-1]))
                         break
                     elif c == 2:
                         name = input("\nWorker's new name: ")
                         last_name = input("\nWorker's new last name: ")
-                        Worker.__set_name(Menus.worker_list[cl-1], name, last_name)
+                        Worker.set_name(Menus.worker_list[cl-1], name, last_name)
                         break
                     elif c== 3:
                         print("Worker's new birthday: ")
                         birthday = Menus.__set_date()
-                        Worker.__set_birthday(Menus.worker_list[cl-1], birthday)
+                        Worker.set_birthday(Menus.worker_list[cl-1], birthday)
                         break
                     elif c == 4:
                         print("Workers's new registry date: ")
                         reg_date = Menus.__set_date()
-                        Worker.__set_date_of_register(Menus.worker_list[cl-1], reg_date)
+                        Worker.set_date_of_register(Menus.worker_list[cl-1], reg_date)
                         break
                     elif c == 5:
                         curp = input("\nWorkers's new curp: ")
-                        Worker.__set_curp(Menus.worker_list[cl-1], curp)
+                        Worker.set_curp(Menus.worker_list[cl-1], curp)
                         break
                     elif c == 6:
                         rfc = input("Workers's new RFC: ")
-                        Worker.__set_rfc(Menus.worker_list[cl-1], rfc)
+                        Worker.set_rfc(Menus.worker_list[cl-1], rfc)
                         break
                     elif c == 7:
                         wage = 0
                         while wage <= 0:
                             wage = int(input("Workers's new wage: "))
                             if wage>0:
-                                Worker.__set_wage(Menus.worker_list[cl-1], wage)
+                                Worker.set_wage(Menus.worker_list[cl-1], wage)
                             else:
                                 print("Invalid input")
                         break
                     elif c == 8:
                         schedule = input("Workers's new schedule: ")
-                        Worker.__set_schedule(Menus.worker_list[cl-1], schedule)
+                        Worker.set_schedule(Menus.worker_list[cl-1], schedule)
                         break
                     elif c == 9:
-                        print("Workers's new RFC: ")
+                        print("Workers's new role: ")
                         role = self.__set_role()
-                        Worker.__set_role(Menus.worker_list[cl-1], role)
+                        Worker.set_role(Menus.worker_list[cl-1], role)
                         break
                     else:
                         print("Invalid input.")
+                break
 
     def __remove_worker(self):
         if not Menus.worker_list:
@@ -629,7 +642,8 @@ class Menus:
     def __set_role(self):
         r = 0
         while True:
-            r = int(input("\nSelect a role: \n1. Technician.\n2. Guide.\n3. Administrator.\n4. Veterinary."))
+            print("\nSelect a role: \n1. Technician.\n2. Guide.\n3. Administrator.\n4. Veterinary.\n")
+            r = int(input("Input: "))
             if r == 1:
                 role = "Technician"
                 break
@@ -653,7 +667,7 @@ class Menus:
             anyperson = 0
             for anyperson in range(len(Menus.client_list)):
                 print("\nClient #"+ str(anyperson+1))
-                print("\nID: %s   Full name: %s   Birthday: %s  Date of register: %s   CURP: %s   Number of visits %s\n", Person.__get_id(Menus.client_list[anyperson]) ,Person.__get_name(Menus.client_list[anyperson]), Person.__get_birthday(Menus.client_list[anyperson]), Person.__get_date_of_register(Menus.client_list[anyperson]), Person.__get_curp(Menus.client_list[anyperson]), Person.__get_num_visits(Menus.client_list[anyperson]))
+                Person.show_client(Menus.client_list[anyperson])
                 anyperson = anyperson + 1
         print(" ") 
     
@@ -661,15 +675,11 @@ class Menus:
         if not Menus.animal_list:
             print("There are no animals registered.")
         else:
-            i = 0
-            for anyanimal in Menus.animal_list:
-                i = i + 1
-                print("\nAnimal #"+str(i))
-                print("\nID %s   Type: %s   Weight: %s   Date of arrival %s   Feed type: %s   Feed frequency: %s  Vaccines: %s   \n", Animal.Animal.__get_id(anyanimal), Animal.Animal.__get_type(anyanimal), Animal.Animal.__get_weight(anyanimal), Animal.Animal.__get_date_of_arrival(anyanimal), Animal.Animal.__get_feed_type(anyanimal), Animal.Animal.__get_feed_frequency(anyanimal), Animal.Animal.__is_vaccinated(anyanimal))
-            if not Animal.__diseases(anyanimal):
-                print("The animal is healthy")
-            else: 
-                Animal.__show_diseases(anyanimal)
+            anyanimal = 0
+            for anyanimal in range(len(Menus.animal_list)):
+                print("\nAnimal #"+str(anyanimal+1))
+                Animal.show_animal(Menus.animal_list[anyanimal])
+                anyanimal = anyanimal + 1
         print(" ")
 
 
@@ -725,14 +735,15 @@ class Menus:
                             print("invalid input")
         date = " "+str(d)+"/"+str(m)+"/"+str(y)
         return date
-    
+
+
     def __show_slaves(self):
         if not Menus.worker_list:
             print("There are no workers registered.")
         else:
-            i = 0
-            for anyworker in Menus.worker_list:
-                i = i + 1
-                print("\nWorker #"+str(i))
-                print("\nID: %s   Full name: %s   Birthday: %s   Role: %s   Date of register: %s   CURP: %s   RFC: %s   Wage: $%d   Schedule %s\n", Worker.__get_id(anyworker) ,Worker.__get_name(anyworker), Worker.__get_birthday(anyworker), Worker.__get_role(anyworker), Worker.__get_date_of_register(anyworker), Worker.__get_curp(anyworker), Worker.__get_rfc(anyworker), Worker.__get_wage(anyworker), Worker.__get_schedule(anyworker))
+            anyworker = 0
+            for anyworker in range(len(Menus.worker_list)):
+                print("\nWorker #"+str(anyworker + 1))
+                Worker.show_slave(Menus.worker_list[anyworker])
+                anyworker = anyworker + 1
         print(" ")

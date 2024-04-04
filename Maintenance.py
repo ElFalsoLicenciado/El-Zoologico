@@ -16,6 +16,6 @@ class Maintenance:
         n = n + 1
         self.__id = n
 
-    def __get_details(self):
-        return"\n Maintenance number: %d \nEmployee in charge: %s \nDate: %s \nAnimal's ID: %s \n Process: %s \nObservations: %s \n", self.__id, self.__employee, self.__date, self.__animal_id, self.__process, self.__comment 
-    
+    def get_details(self):
+        print("\n Maintenance number: " + self.__id + "\nEmployee in charge: " + self.__employee + "\nDate: " +
+        self.__date + "\nAnimal's ID: " + self.__animal_id + "\n Process: " + self.__process + "\nObservations: " + self.__comment)

@@ -20,35 +20,35 @@ class Animal:
         self.__feed_frequency = feed_frequency
         self.__feed_type = feed_type
         self.__vaccines = vaccines
-        self.__set_id()
+        self.set_id()
     
-    def __get_id(self):
+    def get_id(self):
         return self.__id
      
-    def __set_id(self):
+    def set_id(self):
         xd = uuid.uuid4()
         id = "A" + str(xd)
         self.__id = id[0:12]
 
-    def __get_type(self):
+    def get_type(self):
         return type
         
-    def __set_type(self, type):
+    def set_type(self, type):
         self.__type = type
 
-    def __get_date_of_arrival(self):
+    def get_date_of_arrival(self):
         return self.__date_of_arrival
      
-    def __set_date_of_arrival(self, date_of_arrival):
+    def set_date_of_arrival(self, date_of_arrival):
         self.__date_of_arrival = date_of_arrival
 
-    def __get_weight(self):
+    def get_weight(self):
         return self.__weight
      
-    def __set_weight(self, weight):
+    def set_weight(self, weight):
         self.__weight = weight
 
-    def __get_diseases(self):
+    def get_diseases(self):
         return self.__diseases
      
     def __show_diseases(self):
@@ -57,26 +57,34 @@ class Animal:
             lol = lol + 1
             print("Disease #"+str(lol)+": "+disease)
           
-    def __remove_disease(self, i):
+    def remove_disease(self, i):
         del self.__diseases[i]
 
-    def __add_disease(self, disease):
+    def add_disease(self, disease):
         self.__diseases.append(disease)
 
-    def __get_feed_frequency(self):
+    def get_feed_frequency(self):
         return self.__feed_frequency
     
-    def __set_feed_frequency(self, feed_frequency):
+    def set_feed_frequency(self, feed_frequency):
         self.__feed_frequency = feed_frequency
 
-    def __get_feed_type(self):
+    def get_feed_type(self):
         return self.__feed_type
     
-    def __set_feed_type(self, feed_type):
+    def set_feed_type(self, feed_type):
         self.__feed_type = feed_type
 
-    def __is_vaccinated(self):
+    def is_vaccinated(self):
         return self.__vaccines
 
-    def __set_vaccines(self, vaccines):
+    def set_vaccines(self, vaccines):
         self.__vaccines = vaccines
+
+    def show_animal(self):
+        print("\nID: " + self.__id + "  Type: " + self.__type + "  Weight: " + self.__weight + "  Date of arrival: " +
+              self.__date_of_arrival + "  Feed type: " + self.__feed_type + "   Feed frequency: " + self.__feed_frequency + "  Vaccines: " + str(self.__vaccines))  
+        if not self.__diseases:
+            print("The animal is healthy")
+        else: 
+            self.__show_diseases()

@@ -14,7 +14,7 @@ class Tour:
         self.__kids_amount = kids_amount
         self.__adults_amount = adults_amount
 
-    def __get_details(self, visitors, money, date, kids_amount, adults_amount):
+    def get_details(self, visitors, money, date, kids_amount, adults_amount):
         info = "\nGuide in charge: " + self.__guide + ". Visitors: "
         for visitor in visitors:
             kk = " "
