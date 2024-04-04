@@ -721,3 +721,14 @@ class Menus:
                         print("invalid input")
         date = "%d/%d/%d",d,m,y
         return date
+    
+    def __show_slaves():
+        if not Menus.worker_list:
+            print("There are no workers registered.")
+        else:
+            i = 0
+            for anyworker in Menus.worker_list:
+                i = i + 1
+                print("\nWorker #"+i)
+                print("\nID: %s   Full name: %s   Birthday: %s   Role: %s   Date of register: %s   CURP: %s   RFC: %s   Wage: $%d   Schedule %s\n", Worker.Worker.__get_id(anyworker) ,Worker.Worker.__get_name(anyworker), Worker.Worker.__get_birthday(anyworker), Worker.Worker.__get_role(anyworker), Worker.Worker.__get_date_of_register(anyworker), Worker.Worker.__get_curp(anyworker), Worker.Worker.__get_rfc(anyworker), Worker.Worker.__get_wage(anyworker), Worker.Worker.__get_schedule(anyworker))
+        print(" ")
