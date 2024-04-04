@@ -189,7 +189,7 @@ class Menus:
                         break
                     elif c == 1:
                         Animal.__set_id(Menus.animal_list[a-1])
-                        print("\nNew ID: " + Animal.Animal.__get_id(Menus.animal_list[a-1]))
+                        print("\nNew ID: " + Animal.__get_id(Menus.animal_list[a-1]))
                         break
                     elif c == 2:
                         type = input("\nAnimal's new type: ")
@@ -353,14 +353,14 @@ class Menus:
             print("Set the date.")
             date = " "
             date = self.__set_date()
-            tour = Tour.Tour(guide, visitors, money, date, kids, adults)
+            tour = Tour(guide, visitors, money, date, kids, adults)
             Menus.tour_list.add(tour)
 
     def __register_maintenance(self):
         tech_found = False
         technicians = []
         for worker in Menus.worker_list:
-            if worker.__get_role() == "Technician":
+            if Worker.__get_role(worker) == "Technician":
                 tech_found = True
                 technicians.add(worker)
         if tech_found == False and not  Menus.animal_list :
@@ -413,7 +413,7 @@ class Menus:
         for anyworker in list :
             i = i + 1
             print("\n"+ Worker.__get_role(anyworker) + " #"+ i)
-            print("\nID: " + Worker.__get_id(anyworker) + "  Full name: " + Worker.get_name(anyworker)+ "\n")
+            print("\nID: " + Worker.__get_id(anyworker) + "  Full name: " + Worker.__get_name(anyworker)+ "\n")
         print(" ")
 
     def __show_available_clients(self, list):
@@ -432,7 +432,7 @@ class Menus:
             for anytour in Menus.tour_list:
                 i = i + 1
                 print("\nTour #"+ i)
-                print(anytour.Tour.__get_details)
+                print(Tour.__get_details(anytour))
             print(" ")
 
     def __show_maintenance(self):
@@ -443,7 +443,7 @@ class Menus:
             for anymain in Menus.maintenance_list:
                 i = i + 1
                 print("\nTour #"+ i)
-                print(anymain.Maintenance.__get_details)
+                print(Maintenance.__get_details(anymain))
             print(" ")
 
     def __register_client(self):
@@ -654,15 +654,15 @@ class Menus:
         print(" ") 
     
     def __show_animals():
-        if not Menus.Menus.animal_list:
+        if not Menus.animal_list:
             print("There are no animals registered.")
         else:
             i = 0
-            for anyanimal in Menus.Menus.animal_list:
+            for anyanimal in Menus.animal_list:
                 i = i + 1
                 print("\nAnimal #"+i)
                 print("\nID %s   Type: %s   Weight: %s   Date of arrival %s   Feed type: %s   Feed frequency: %s  Vaccines: %s   \n", Animal.Animal.__get_id(anyanimal), Animal.Animal.__get_type(anyanimal), Animal.Animal.__get_weight(anyanimal), Animal.Animal.__get_date_of_arrival(anyanimal), Animal.Animal.__get_feed_type(anyanimal), Animal.Animal.__get_feed_frequency(anyanimal), Animal.Animal.__is_vaccinated(anyanimal))
-            if not anyanimal.Animal.__diseases :
+            if not Animal.__diseases(anyanimal):
                 print("The animal is healthy")
             else: 
                 Animal.__show_diseases(anyanimal)
@@ -730,5 +730,5 @@ class Menus:
             for anyworker in Menus.worker_list:
                 i = i + 1
                 print("\nWorker #"+i)
-                print("\nID: %s   Full name: %s   Birthday: %s   Role: %s   Date of register: %s   CURP: %s   RFC: %s   Wage: $%d   Schedule %s\n", Worker.Worker.__get_id(anyworker) ,Worker.Worker.__get_name(anyworker), Worker.Worker.__get_birthday(anyworker), Worker.Worker.__get_role(anyworker), Worker.Worker.__get_date_of_register(anyworker), Worker.Worker.__get_curp(anyworker), Worker.Worker.__get_rfc(anyworker), Worker.Worker.__get_wage(anyworker), Worker.Worker.__get_schedule(anyworker))
+                print("\nID: %s   Full name: %s   Birthday: %s   Role: %s   Date of register: %s   CURP: %s   RFC: %s   Wage: $%d   Schedule %s\n", Worker.__get_id(anyworker) ,Worker.__get_name(anyworker), Worker.__get_birthday(anyworker), Worker.__get_role(anyworker), Worker.__get_date_of_register(anyworker), Worker.__get_curp(anyworker), Worker.__get_rfc(anyworker), Worker.__get_wage(anyworker), Worker.__get_schedule(anyworker))
         print(" ")
