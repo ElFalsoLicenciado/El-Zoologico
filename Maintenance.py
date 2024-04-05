@@ -7,14 +7,13 @@ class Maintenance:
     __date = " "
     __comment = " "
 
-    def __init__(self, employee, animal_id, process, date, comment):
+    def __init__(self, employee, animal_id, process, date, comment, id):
         self.__employee = employee
         self.__animal_id = animal_id
         self.__process = process
         self.__date = date
         self.__comment = comment
-        n = n + 1
-        self.__id = n
+        self.__id = id
 
     def get_details(self):
         print("\n Maintenance number: " + self.__id + "\nEmployee in charge: " + self.__employee + "\nDate: " +

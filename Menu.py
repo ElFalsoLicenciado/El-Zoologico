@@ -475,10 +475,12 @@ class Menus:
     def __register_maintenance(self):
         tech_found = False
         technicians = []
-        for worker in Menus.worker_list:
-            if Worker.get_role(worker) == "Technician":
+        worker = 0
+        for worker in range(len(Menus.worker_list)):
+            if Worker.get_role(Menus.worker_list[worker]) == "Technician":
                 tech_found = True
                 technicians.append(worker)
+            worker = worker + 1
         if tech_found == False and not  Menus.animal_list :
             print("There's neither technicians neither animals available.")
         elif tech_found == False :
@@ -489,7 +491,7 @@ class Menus:
             g = 0
             while True :
                 self.__show_specific_workers(technicians)
-                g = input("Select a technician")
+                g = input("Select a technician: ")
                 try:
                     pp = int(g)
                 except ValueError:
@@ -499,7 +501,7 @@ class Menus:
                 if g < 1 and g > len(technicians) :
                     print("Invalid input")
                 else:
-                    technician = Worker.get_name(technicians[g-1])
+                    technician = Worker.get_name(Menus.worker_list[g-1])
                     break
             t=0
             while True :
@@ -528,12 +530,13 @@ class Menus:
                     if jk != 0 and jk != 1:
                         print("Invalid input")
                     elif jk == 1 :
-                        comments = comments + "\n" + input("Write the comment: ")
+                        com = input("Write the comment: ")
+                        comments = comments + "\n" + com
                     elif jk == 0 :
-                        comments = "None"
+                        comments = comments
                         break
-
-            maintenance = Maintenance(technician, animal_id, process, date, comments)
+            id = len(Menus.maintenance_list+1)
+            maintenance = Maintenance(technician, animal_id, process, date, comments, id)
             Menus.maintenance_list.append(maintenance)
 
     def __show_specific_workers(self, list):
