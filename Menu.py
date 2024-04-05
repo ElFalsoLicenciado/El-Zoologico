@@ -817,6 +817,7 @@ class Menus:
                     cl = int(cl)
                     if  cl> 0 and cl <= len(Menus.worker_list):
                         del Menus.worker_list[cl-1]
+                        break
                     else:
                         print("Invalid input")
 

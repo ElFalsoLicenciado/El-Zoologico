@@ -17,8 +17,9 @@ class Tour:
     def get_details(self):
         info = "\nGuide in charge: " + self.__guide + ". Visitors: "
         i = 0
-        for i in self.__visitors:
-            kk = " " + self.__visitors[i] + ", "
+        kk = ""
+        for i in range(len(self.__visitors)):
             i = i + 1
+            kk = kk + " " + str(self.__visitors[i-1]) + ", "    
         info = info + kk + "\nTotal in tickets: $" + str(self.__money) + ", date: " + self.__date + ", number of kids: " + str(self.__kids_amount) + ", number of adults: " + str(self.__adults_amount)
         return info
