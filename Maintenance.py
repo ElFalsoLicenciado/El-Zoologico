@@ -14,7 +14,13 @@ class Maintenance:
         self.__date = date
         self.__comment = comment
         self.__id = id
+    
+    def get_animal(self):
+        return self.__animal_id
+    
+    def get_empployee(self):
+        return self.__employee
 
     def get_details(self):
-        print("\n Maintenance number: " + self.__id + "\nEmployee in charge: " + self.__employee + "\nDate: " +
-        self.__date + "\nAnimal's ID: " + self.__animal_id + "\n Process: " + self.__process + "\nObservations: " + self.__comment)
+        print("\nMaintenance number: " + str(self.__id) + "\nEmployee in charge: " + self.__employee + "\nDate: " +
+        self.__date + "\nAnimal's ID: " + self.__animal_id + "\nProcess: " + self.__process + "\nObservations: " + self.__comment)

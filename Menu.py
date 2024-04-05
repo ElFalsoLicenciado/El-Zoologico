@@ -12,6 +12,7 @@ class Menus:
     maintenance_list = []
     tour_list = []
     worker_list = []
+    blank = []
     
     def __init__(self):
         self.__exec()
@@ -90,6 +91,7 @@ class Menus:
                             elif i == 3:
                                 print("Modifying an animal")
                                 self.__modify_animal()
+                                break
                             else:
                                 print("Invalid input.")
                 elif p == 3:
@@ -114,8 +116,9 @@ class Menus:
                                 self.__remove_client()
                                 break
                             elif i == 3:
-                                print("Removing a client")
+                                print("Removing an animal")
                                 self.__remove_animal()
+                                break
                             else:
                                 print("Invalid input.")
                 elif p == 4:
@@ -186,7 +189,8 @@ class Menus:
         diseases = []
         jk = 0
         while True :
-            jk = input("Would you like to add a disease to the animal?\n1.Yes   0.No")
+            print("Would you like to add a disease to the animal?\n1.Yes   0.No")
+            jk = input("Input: ")
             try:
                 pp = int(jk)
             except ValueError:
@@ -202,7 +206,8 @@ class Menus:
                     break
         tt = 0
         while True :
-            tt = input("Is the animal vaccinated?\n1.Yes   0.No")
+            print("Is the animal vaccinated?\n1.Yes   0.No")
+            tt = input("Input: ")
             try:
                 pp = int(tt)
             except ValueError:
@@ -240,114 +245,115 @@ class Menus:
                         print("Invalid input")
             c = 0
             while True:
-                while True:
-                    print("\n1.Change ID\n2. Change type\n3. Change date of arrival\n4. Change weight\n5. Manage diseases\n6. Change feed type\n7. Change feed frequency\n8. Set diseases\n0. Return")
-                    c = input("Input: ")
-                    try:
-                        pp = int(c)
-                    except ValueError:
-                        print("Invalid input")
-                    else:
-                        c = int(c)
-                        if c == 0:
-                            break
-                        elif c == 1:
-                            Animal.set_id(Menus.animal_list[a-1])
-                            print("\nNew ID: " + Animal.get_id(Menus.animal_list[a-1]))
-                            break
-                        elif c == 2:
-                            type = input("\nAnimal's new type: ")
-                            Animal.set_type(Menus.animal_list[a-1], type)
-                            break
-                        elif c== 3:
-                            print("Animal's new date of arrival: ")
-                            arr_date = Menus.__set_date()
-                            Animal.set_date_of_arrival(Menus.animal_list[a-1], arr_date)
-                            break
-                        elif c == 4:
-                            weight = 0.0
-                            while weight <= 0 :
-                                weight = float(input("\nAnimal's new weight: "))
-                                if weight > 0:
-                                    Animal.set_weight(Menus.animal_list[a-1], weight)
-                                    break
-                                else:
-                                    print("Invalid input.")
-                            break
-                        elif c == 5:
-                            d = 0
-                            while True:
-                                d = input("\n1. Register disease 2. Dismiss disease\nInput: ")
-                                try:
-                                    pp = int(d)
-                                except ValueError:
+                print("\n1. Change ID\n2. Change type\n3. Change date of arrival\n4. Change weight\n5. Manage diseases\n6. Change feed type\n7. Change feed frequency\n8. Set vaccines\n0. Return")
+                c = input("Input: ")
+                try:
+                    pp = int(c)
+                except ValueError:
+                    print("Invalid input")
+                else:
+                    c = int(c)
+                    if c == 0:
+                        break
+                    elif c == 1:
+                        Animal.set_id(Menus.animal_list[a-1])
+                        print("\nNew ID: " + Animal.get_id(Menus.animal_list[a-1]))
+                        break
+                    elif c == 2:
+                        type = input("\nAnimal's new type: ")
+                        Animal.set_type(Menus.animal_list[a-1], type)
+                        break
+                    elif c== 3:
+                        print("Animal's new date of arrival: ")
+                        arr_date = Menus.__set_date()
+                        Animal.set_date_of_arrival(Menus.animal_list[a-1], arr_date)
+                        break
+                    elif c == 4:
+                        weight = 0.0
+                        while weight <= 0 :
+                            weight = float(input("\nAnimal's new weight: "))
+                            if weight > 0:
+                                Animal.set_weight(Menus.animal_list[a-1], weight)
+                                break
+                            else:
+                                print("Invalid input.")
+                        break
+                    elif c == 5:
+                        d = 0
+                        while True:
+                            d = input("\n1. Register disease 0. Dismiss disease\nInput: ")
+                            try:
+                                pp = int(d)
+                            except ValueError:
+                                print("Invalid input")
+                            else:
+                                d = int(d)
+                                if d != 0 and d != 1:
                                     print("Invalid input")
-                                else:
-                                    d = int(d)
-                                    if d != 0 and d != 1:
-                                        print("Invalid input")
-                                    elif d == 1 :
-                                        disease = input("disease to add: ")
-                                        Animal.add_disease[Menus.animal_list[a-1], disease]
-                                        break
-                                    elif d == 0 :
-                                        if not Animal.__diseases:
-                                            print("There are no diseases to dismiss")
-                                            break
-                                        else:
-                                            while True:
-                                                vv = 0
-                                                while True:
-                                                    Animal.__show_diseases
-                                                    vv = input("Disease to dismiss: ")
-                                                    try:
-                                                        pp = int(vv)
-                                                    except ValueError:
-                                                        print("Invalid input")
-                                                    else:
-                                                        vv = int(vv)
-                                                        if  vv> 0 and vv <= len(Menus.animal_list):
-                                                            Animal.remove_disease[Menus.animal_list[a-1],vv-1]
-                                                            break
-                                                        else:
-                                                            print("Invalid input")
-                                            break
-                        elif c == 6:
-                            feed_type = input("\nAnimal's new type: ")
-                            Animal.set_feed_type(Menus.animal_list[a-1], feed_type)
-                            break
-                        elif c == 7:
-                            feed_freq = ""
-                            while feed_freq <= "" :
-                                feed_freq = input("\nAnimal's new feed frequency: ")
-                                if feed_freq != "":
-                                    Animal.set_feed_frequency(Menus.animal_list[a-1], feed_freq)
+                                elif d == 1 :
+                                    disease = input("Disease to add: ")
+                                    Animal.add_disease(Menus.animal_list[a-1], disease)
                                     break
-                                else:
-                                    print("Invalid input.")
-                            break
-                        elif c == 8:
-                            tt = 0
-                            while True :
-                                tt = input("Is the animal vaccinated?\n1.Yes   0.No")
-                                try:
-                                    pp = int(tt)
-                                except ValueError:
+                                elif d == 0 :
+                                    if Animal.get_diseases(Menus.animal_list[a-1]) == Menus.blank:
+                                        print("There are no diseases to dismiss")
+                                        break
+                                    else:
+                                        while True:
+                                            vv = 0
+                                            Animal.show_diseases(Menus.animal_list[a-1])
+                                            vv = input("Disease to dismiss: ")
+                                            try:
+                                                pp = int(vv)
+                                            except ValueError:
+                                                print("Invalid input")
+                                            else:
+                                                vv = int(vv)
+                                                if  vv> 0 and vv <= len(Menus.animal_list):
+                                                    Animal.remove_disease(Menus.animal_list[a-1],vv-1)
+                                                    break
+                                                else:
+                                                    print("Invalid input")
+                                        break
+                    elif c == 6:
+                        feed_type = input("\nAnimal's new type: ")
+                        Animal.set_feed_type(Menus.animal_list[a-1], feed_type)
+                        break
+                    elif c == 7:
+                        feed_freq = ""
+                        while feed_freq <= "" :
+                            feed_freq = input("\nAnimal's new feed frequency: ")
+                            if feed_freq != "":
+                                Animal.set_feed_frequency(Menus.animal_list[a-1], feed_freq)
+                                break
+                            else:
+                                print("Invalid input.")
+                        break
+                    elif c == 8:
+                        tt = 0
+                        while True :
+                            print("Is the animal vaccinated?\n1.Yes   0.No")
+                            tt = input("Input: ")
+                            try:
+                                pp = int(tt)
+                            except ValueError:
+                                print("Invalid input")
+                            else:
+                                tt = int(tt)
+                                if tt != 0 and tt != 1:
                                     print("Invalid input")
-                                else:
-                                    tt = int(tt)
-                                    if tt != 0 and tt != 1:
-                                        print("Invalid input")
-                                    elif tt == 1 :
-                                        vac = True
-                                        break
-                                    elif tt == 0 :
-                                        vac = False
-                                        break
+                                elif tt == 1 :
+                                    vac = True
                                     Animal.set_vaccines(Menus.animal_list[a-1], vac)
-                        else:
-                            print("Invalid input.")
-
+                                    break
+                                elif tt == 0 :
+                                    vac = False
+                                    Animal.set_vaccines(Menus.animal_list[a-1], vac)
+                                    break
+                                
+                    else:
+                        print("Invalid input.")
+                        
     def __remove_animal(self):
         if not Menus.animal_list:
             print("There are no animals registered.")
@@ -371,7 +377,7 @@ class Menus:
     def __register_tour(self):
         guide_found = False
         guides = []
-        av_clients = []
+        av_clients = len(Menus.client_list)
         worker = 0
         for worker in range(len(Menus.worker_list)):
             if  Worker.get_role(Menus.worker_list[worker]) == "Guide":
@@ -408,10 +414,10 @@ class Menus:
             count = 0
             g = 0
             while True :
-                if (len(Menus.client_list)-len(av_clients)) < 1 and count == 0:
+                if av_clients < 1 and count == 0:
                     print("There are no clients available")
                     break
-                elif (len(Menus.client_list)-len(av_clients)) < 1:
+                elif av_clients == 0:
                     print("There are no more clients available")
                     break
                 else:
@@ -431,7 +437,7 @@ class Menus:
                             else:
                                 break
                         else:
-                            self.__show_available_clients(av_clients)
+                            self.__show_clients()
                             b = input("Select a visitor: ")
                             try:
                                 pp = int(b)
@@ -439,32 +445,32 @@ class Menus:
                                 print("Invalid input")
                             else:
                                 b = int(b)
-                                if b < 1 and b > (len(Menus.client_list)-len(av_clients)):
+                                if b < 1 and b > (len(Menus.client_list)):
                                     print("Invalid input")
-                                    break
                                 else:
                                     aux = Person.get_id(Menus.client_list[b-1])
-                                    av_clients.append(b)
                                     ine = aux[1]
+                                    visits = 0
                                     if ine == "A" :
                                         adults = adults + 1
                                         Person.add_visit(Menus.client_list[b-1])
-                                        visits = Person.get_num_visits(Menus.client_list[b-1])
-                                        if visits%5 == 0 :
+                                        visits = int(Person.get_num_visits(Menus.client_list[b-1]))
+                                        if (visits % 5) == 0 :
                                             money = money + 80
                                         else:
                                             money = money + 100
                                     elif ine == "C" :
-                                        adults = adults + 1
+                                        kids = kids + 1
                                         Person.add_visit(Menus.client_list[b-1])
-                                        visits = Person.get_num_visits(Menus.client_list[b-1])
-                                        if visits%5 == 0 :
+                                        visits = int(Person.get_num_visits(Menus.client_list[b-1]))
+                                        if (visits % 5) == 0 :
                                             money = money + 40
                                         else:
                                             money = money + 50
                                     visitors.append(Person.get_name(Menus.client_list[b-1]))
-                                    av_clients.append(b-1)
+                                    av_clients = av_clients - 1
                                     count = count + 1 
+                                    
             if count > 0:                  
                 print("Set the date.")
                 date = " "
@@ -507,11 +513,17 @@ class Menus:
             while True :
                 self.__show_animals()
                 t = input("Select an animal: ")
-                if t < 1 and t > len(Menus.animal_list) :
+                try:
+                    pp = int(t)
+                except ValueError:
                     print("Invalid input")
                 else:
-                    animal_id = Animal.get_id(Menus.animal_list[t-1])
-                    break
+                    t = int(t)
+                    if t < 1 and t > len(Menus.animal_list) :
+                        print("Invalid input")
+                    else:
+                        animal_id = Animal.get_id(Menus.animal_list[t-1])
+                        break
 
             process = input("\nWrite the process: ")
             print("Set the date: ")
@@ -520,7 +532,8 @@ class Menus:
             comments = " "
             jk = 0
             while True :
-                jk = input("Would you like to add a comment?\n1.Yes   0.No")
+                print("Would you like to add a comment?\n1.Yes   0.No")
+                jk = input("Input: ")
                 try:
                     pp = int(jk)
                 except ValueError:
@@ -535,7 +548,7 @@ class Menus:
                     elif jk == 0 :
                         comments = comments
                         break
-            id = len(Menus.maintenance_list+1)
+            id = len(Menus.maintenance_list)+1
             maintenance = Maintenance(technician, animal_id, process, date, comments, id)
             Menus.maintenance_list.append(maintenance)
 
@@ -629,58 +642,57 @@ class Menus:
                         print("Invalid input")
             c = 0
             while True:
-                while True:
-                    print("\n1. Change ID\n2.Change full name\n3.Change birthday\n4.Change CURP\n5.Change number of visits\n6.Change date of register\n0. Return")
-                    c = input("Input: ")
-                    try:
-                        pp = int(c)
-                    except ValueError:
-                        print("Invalid input")
-                    else:
-                        c = int(c)
-                        if c == 0:
-                            break
-                        elif c == 1:
-                            Person.set_id(Menus.client_list[cl-1])
-                            print("\nNew ID: " + Person.get_id(Menus.client_list[cl-1]))
-                            break
-                        elif c == 2:
-                            name = input("\nClient's new name: ")
-                            last_name = input("\nClient's new last name: ")
-                            Person.set_name(Menus.client_list[cl-1], name, last_name)
-                            break
-                        elif c== 3:
-                            print("Client's new birthday: ")
-                            birthday = Menus.__set_date()
-                            Person.set_birthday(Menus.client_list[cl-1], birthday)
-                            break
-                        elif c == 4:
-                            curp = input("\nClient's new curp: ")
-                            Person.set_curp(Menus.client_list[cl-1], curp)
-                            break
-                        elif c == 5:
-                            visits = 0
-                            while True :
-                                visits = input("\nClient's visits: ")
-                                try:
-                                    pp = int(visits)
-                                except ValueError:
-                                    print("Invalid input")
+                print("\n1. Change ID\n2. Change full name\n3. Change birthday\n4. Change CURP\n5. Change number of visits\n6. Change date of register\n0. Return")
+                c = input("Input: ")
+                try:
+                    pp = int(c)
+                except ValueError:
+                    print("Invalid input")
+                else:
+                    c = int(c)
+                    if c == 0:
+                        break
+                    elif c == 1:
+                        Person.set_id(Menus.client_list[cl-1])
+                        print("\nNew ID: " + Person.get_id(Menus.client_list[cl-1]))
+                        break
+                    elif c == 2:
+                        name = input("\nClient's new name: ")
+                        last_name = input("\nClient's new last name: ")
+                        Person.set_name(Menus.client_list[cl-1], name, last_name)
+                        break
+                    elif c== 3:
+                        print("Client's new birthday: ")
+                        birthday = Menus.__set_date()
+                        Person.set_birthday(Menus.client_list[cl-1], birthday)
+                        break
+                    elif c == 4:
+                        curp = input("\nClient's new curp: ")
+                        Person.set_curp(Menus.client_list[cl-1], curp)
+                        break
+                    elif c == 5:
+                        visits = 0
+                        while True :
+                            visits = input("\nClient's visits: ")
+                            try:
+                                pp = int(visits)
+                            except ValueError:
+                                print("Invalid input")
+                            else:
+                                visits = int(visits)
+                                if visits >= 0:
+                                    Person.set_num_visits(Menus.client_list[cl-1], visits)
+                                    break
                                 else:
-                                    visits = int(visits)
-                                    if visits >= 0:
-                                        Person.set_num_visits(Menus.client_list[cl-1], visits)
-                                        break
-                                    else:
-                                        print("Invalid input.")
-                            break
-                        elif c == 6:
-                            print("Client's new registry date: ")
-                            reg_date = Menus.__set_date()
-                            Person.set_date_of_register(Menus.client_list[cl-1], reg_date)
-                            break
-                        else:
-                            print("Invalid input.")
+                                    print("Invalid input.")
+                        break
+                    elif c == 6:
+                        print("Client's new registry date: ")
+                        reg_date = Menus.__set_date()
+                        Person.set_date_of_register(Menus.client_list[cl-1], reg_date)
+                        break
+                    else:
+                        print("Invalid input.")
 
     def __remove_client(self):
         if not Menus.client_list:
@@ -711,7 +723,20 @@ class Menus:
         reg_date = Menus.__set_date()
         curp = input("\nWorker's CURP: ")
         rfc = input("\nWorker's RFC: ")
-        wage = input("\nWorker's wage: ")
+        while True:
+            wg = input("\nWorker's wage: ")
+            try:
+                wpg = int(wg)
+            except ValueError:
+                print("Invalid input")
+            else:
+                wg = int(wg)
+                if wg >0 :
+                    wage = int(wg)
+                    break
+                else:
+                    print("Invalid input")
+                
         schedule = input("\nWorker's schedule: ")
         role = self.__set_role()
 
@@ -739,7 +764,7 @@ class Menus:
             c = 0
             while True:
                 while True:
-                    print("\n1. Change ID\n2.Change full name\n3.Change birthday\n4.Change date of registry\n5.Change CURP\n6.Change RFC\n7.Change wage\n8.Change schedule\n9.Change role\n0. Return")
+                    print("\n1. Change ID\n2. Change full name\n3. Change birthday\n4. Change date of registry\n5. Change CURP\n6. Change RFC\n7. Change wage\n8. Change schedule\n9. Change role\n0. Return")
                     c = input("Input: ")
                     try:
                         pp = int(c)
@@ -777,8 +802,8 @@ class Menus:
                             Worker.set_rfc(Menus.worker_list[cl-1], rfc)
                             break
                         elif c == 7:
-                            wage = 0
-                            while wage <= 0:
+                            while True:
+                                wage = 0
                                 wage = input("Workers's new wage: ")
                                 try:
                                     pp = int(wage)
@@ -788,6 +813,7 @@ class Menus:
                                     wage = int(wage)
                                     if wage>0:
                                         Worker.set_wage(Menus.worker_list[cl-1], wage)
+                                        break
                                     else:
                                         print("Invalid input")
                             break

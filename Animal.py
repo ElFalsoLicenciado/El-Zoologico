@@ -51,11 +51,11 @@ class Animal:
     def get_diseases(self):
         return self.__diseases
      
-    def __show_diseases(self):
-        lol = 0
-        for disease in self.__diseases:
-            lol = lol + 1
-            print("Disease #"+str(lol)+": "+disease)
+    def show_diseases(self):
+        disease = 0
+        for disease in range(len(self.__diseases)):
+            print("Disease #"+str(disease + 1)+": "+ self.__diseases[disease])
+            disease = disease + 1
           
     def remove_disease(self, i):
         del self.__diseases[i]
@@ -82,9 +82,9 @@ class Animal:
         self.__vaccines = vaccines
 
     def show_animal(self):
-        print("\nID: " + self.__id + "  Type: " + self.__type + "  Weight: " + self.__weight + "  Date of arrival: " +
-              self.__date_of_arrival + "  Feed type: " + self.__feed_type + "   Feed frequency: " + self.__feed_frequency + "  Vaccines: " + str(self.__vaccines))  
+        print("\nID: " + self.__id + "  Type: " + self.__type + "  Weight: " + str(self.__weight) + "  Date of arrival: " +
+              self.__date_of_arrival + "  Feed type: " + self.__feed_type + "   Feed frequency: " + self.__feed_frequency + "  Is vaccinated: " + str(self.__vaccines))  
         if not self.__diseases:
             print("The animal is healthy")
         else: 
-            self.__show_diseases()
+            self.show_diseases()

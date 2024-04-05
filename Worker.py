@@ -33,7 +33,7 @@ class Worker:
             xd = uuid.uuid4()
             id = "WG" + str(xd)
             id = id[0:12]
-        elif self.__role == "Administrador" :
+        elif self.__role == "Administrator" :
             xd = uuid.uuid4()
             id = "WA" + str(xd)
             id = id[0:12]
@@ -100,5 +100,5 @@ class Worker:
     def show_slave(self):
         print("ID: "+ self.__id +   "  Full name: " + self.__name + " " + self.__last_name +  "  Birthday: " + self.__birthday +  
         "  Date of register: " + self.__date_of_register + "  CURP: " + self.__curp +  "  RFC: "+ self.__rfc +
-        "  Role: " + self.__role + "  Wage: " + self.__wage + "  Schedule:  " + self.__schedule)
+        "  Role: " + self.__role + "  Wage: " + str(self.__wage) + "  Schedule:  " + self.__schedule)
 
