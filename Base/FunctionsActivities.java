@@ -220,7 +220,6 @@ public class FunctionsActivities {
                 case 0 -> comments = "None";
             }
 
-            sc.nextLine();
             Maintenance maintenance = new Maintenance(technician,animalID,process,date,comments);
             MaintenanceList.maintenanceList.add(maintenance);
         }
@@ -249,10 +248,7 @@ public class FunctionsActivities {
         if(TourList.tourList.isEmpty()){
             System.out.println("There's no tours registered.");
         }else {
-            int i = 0;
             for(Tour anytour : TourList.tourList){
-                i++;
-                System.out.print("\nTour #" + i);
                 System.out.println(anytour.getDetails());
             }
             System.out.println();
@@ -263,10 +259,7 @@ public class FunctionsActivities {
         if(MaintenanceList.maintenanceList.isEmpty()){
             System.out.println("There's no maintenances registered.");
         }else {
-            int i = 0;
             for(Maintenance anymaintenance : MaintenanceList.maintenanceList){
-                i++;
-                System.out.print("\nMaintenance #"+i);
                 System.out.println(anymaintenance.getDetails());
             }
             System.out.println();

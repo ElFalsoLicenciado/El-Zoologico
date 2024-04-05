@@ -3,7 +3,8 @@ package Objects;
 import java.util.ArrayList;
 
 public class Tour {
-
+    private static int n = 0;
+    private final int ID;
     private final String guide;
     private ArrayList<String> visitors = new ArrayList<String>();
     private final int money;
@@ -18,10 +19,12 @@ public class Tour {
         this.date = date;
         this.kidsAmount = kidsAmount;
         this.adultsAmount = adultsAmount;
+        n++;
+        ID = n;
     }
 
     public String getDetails(){
-        String info = String.format("\nGuide in charge: %s, Visitors: ",guide);
+        String info = String.format("\nTour number: #%s%nGuide in charge: %s, Visitors: ",ID,guide);
         for (String visitor : visitors) {
             info = info + visitor + ". ";
         }

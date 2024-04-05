@@ -20,10 +20,10 @@ public class Maintenance {
     }
 
     public String getDetails(){
-        if(comment.isEmpty()){
-            return String.format("%nMaintenance number: %d %nEmployee in charge: %s, date: %s, animal's ID: %s%n Process: %s",ID,employee,date,animalID,process);
+        if(comment.equalsIgnoreCase("none")){
+            return String.format("%nMaintenance number: #%d %nEmployee in charge: %s, date: %s, animal's ID: %s%nProcess: %s",ID,employee,date,animalID,process);
         }else{
-            return String.format("%nMaintenance number: %d %nEmployee in charge: %s, date: %s, animal's ID: %s%n Process: %s%n Observations: %s" ,ID,employee,date,animalID,process,comment);
+            return String.format("%nMaintenance number: #%d %nEmployee in charge: %s, date: %s, animal's ID: %s%nProcess: %s%nObservations: %s" ,ID,employee,date,animalID,process,comment);
         }
     }
 

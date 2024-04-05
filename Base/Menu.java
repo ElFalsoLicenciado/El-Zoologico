@@ -26,7 +26,7 @@ public class Menu {
                     sc.nextLine();
                 }
             }while (!flag);
-            flag = false;
+            flag = false; sc.nextLine();
 
             switch (p) {
                 case 1 -> {
@@ -98,7 +98,7 @@ public class Menu {
                                 sc.nextLine();
                             }
                         } while (!flag);
-                        flag = false;
+                        flag = false; sc.nextLine();
 
                         switch (i) {
                             case 1 -> {
@@ -139,7 +139,7 @@ public class Menu {
                                 sc.nextLine();
                             }
                         } while (!flag);
-                        flag = false;
+                        flag = false; sc.nextLine();
 
                         switch (i) {
                             case 1 -> {
@@ -181,7 +181,7 @@ public class Menu {
                                 sc.nextLine();
                             }
                         } while (!flag);
-                        flag = false;
+                        flag = false; sc.nextLine();
 
                         switch (i) {
                             case 1 -> {
