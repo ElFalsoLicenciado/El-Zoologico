@@ -14,11 +14,10 @@ class Tour:
         self.__kids_amount = kids_amount
         self.__adults_amount = adults_amount
 
-    def get_details(self, visitors, money, date, kids_amount, adults_amount):
+    def get_details(self):
         info = "\nGuide in charge: " + self.__guide + ". Visitors: "
-        for visitor in visitors:
-            kk = " "
-            kk = kk + visitor + ", "
-        
-        info = kk + "\nTotal in tickets: $" + str(money) + ", date: " + date + ", number of kids: " + str(kids_amount) + ", number of adults: " + str(adults_amount)
+        for i in self.__visitors:
+            kk = " " + self.__visitors[i] + ", "
+
+        info = info + kk + "\nTotal in tickets: $" + str(self.__money) + ", date: " + self.__date + ", number of kids: " + str(self.__kids_amount) + ", number of adults: " + str(self.__adults_amount)
         return info

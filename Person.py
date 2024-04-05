@@ -15,7 +15,9 @@ class Person:
         self.__birthday = birthday
         self.__curp = curp
         self.__date_of_register = date_of_register
-        self._id = self.set_id()
+        self.set_id()
+        self.__num_visits = 0
+        
 
     def set_name(self, name, last_name):
         self.__name = name
@@ -32,7 +34,7 @@ class Person:
         self.__num_visits = num_visits
 
     def add_visit(self):
-        __num_visits = __num_visits + 1
+        self.__num_visits = self.__num_visits + 1
 
     def set_date_of_register(self, date_of_register):
         self.__date_of_register = date_of_register
@@ -42,7 +44,6 @@ class Person:
     
     def set_id(self):
         year = 0
-        print(self.__birthday)
         year = int(self.__birthday[-4:])
         if 2024 - year > 17 : 
             xd = uuid.uuid4()
@@ -52,7 +53,7 @@ class Person:
             xd = uuid.uuid4()
             id = "CC" + str(xd)
             id = id[0:12]
-        return id
+        self.__id = id
 
     def get_name(self):
         return self.__name + " " + self.__last_name
@@ -70,5 +71,5 @@ class Person:
         return self.__date_of_register
     
     def show_client(self):
-        print("\nID: "+ self.__id +   "  Full name: " + self.__name + " " + self.__last_name + "  Birthday: " + self.__birthday +  
+        print("ID: "+ self.__id +   "  Full name: " + self.__name + " " + self.__last_name + "  Birthday: " + self.__birthday +  
         "  Date of register: " + self.__date_of_register + "  CURP: " + self.__curp +  "  Number of visits: "+ str(self.__num_visits))

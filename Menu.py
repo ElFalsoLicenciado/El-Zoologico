@@ -192,7 +192,7 @@ class Menus:
                         break
                     elif c == 1:
                         Animal.set_id(Menus.animal_list[a-1])
-                        print("\nNew ID: " + Animal.__get_id(Menus.animal_list[a-1]))
+                        print("\nNew ID: " + Animal.get_id(Menus.animal_list[a-1]))
                         break
                     elif c == 2:
                         type = input("\nAnimal's new type: ")
@@ -221,7 +221,7 @@ class Menus:
                                 print("Invalid input")
                             elif d == 1 :
                                 disease = input("disease to add: ")
-                                Animal.__add_disease[Menus.animal_list[a-1], disease]
+                                Animal.add_disease[Menus.animal_list[a-1], disease]
                                 break
                             elif d == 0 :
                                 if not Animal.__diseases:
@@ -234,7 +234,7 @@ class Menus:
                                             Animal.__show_diseases
                                             vv = int(input("Disease to dismiss: "))
                                         if  vv> 0 and vv <= len(Menus.animal_list):
-                                            Animal.__remove_disease[Menus.animal_list[a-1],vv-1]
+                                            Animal.remove_disease[Menus.animal_list[a-1],vv-1]
                                             break
                                         else:
                                             print("Invalid input")
@@ -286,7 +286,6 @@ class Menus:
         guide_found = False
         guides = []
         av_clients = []
-        av_clients = Menus.client_list
         worker = 0
         for worker in range(len(Menus.worker_list)):
             if  Worker.get_role(Menus.worker_list[worker]) == "Guide":
@@ -308,64 +307,72 @@ class Menus:
             g = 0
             while True :
                 self.__show_specific_workers(guides)
-                g = int(input("Select a guide"))
-                if g < 1 and g > len(guides)+1 :
+                g = int(input("Select a guide: "))
+                if g < 1 and g > len(guides) :
                     print("Invalid input")
                 else:
-                    guide = Worker.get_name(guides[g-1])
+                    guide = Worker.get_name(Menus.worker_list[g-1])
                     break
             count = 0
             g = 0
             while True :
-                g = int(input("Would you like to add a visitor?\n1.Yes   0.No"))
-                if g != 0 and g != 1:
-                    print("Invalid input")
-                elif g == 1 :
-                    if not av_clients:
-                        print("There are no clients available")
+                if (len(Menus.client_list)-len(av_clients)) < 1 and count == 0:
+                    print("There are no clients available")
+                    break
+                elif (len(Menus.client_list)-len(av_clients)) < 1:
+                    print("There are no more clients available")
+                    break
+                else:
+                    g = print("Would you like to add a visitor?\n1.Yes   0.No")
+                    g = int(input("Input: "))
+                    if g != 0 and g != 1:
+                        print("Invalid input")
+                    elif g == 0 :
+                        if count < 1:
+                            print("Add at least one visitor")
+                        else:
+                            break
                     else:
                         self.__show_available_clients(av_clients)
-                        b = input("Select a visitor: ")
-                        if b < 1 and b > len(guides)+1 :
+                        b = int(input("Select a visitor: "))
+                        if b < 1 and b > (len(Menus.client_list)-len(av_clients)):
                             print("Invalid input")
+                            break
                         else:
-                            aux = Person.__get_id(Menus.client_list[b-1])
+                            aux = Person.get_id(Menus.client_list[b-1])
+                            av_clients.append(b)
                             ine = aux[1]
                             if ine == "A" :
                                 adults = adults + 1
-                                Person.__add_visit(Menus.client_list[b-1])
+                                Person.add_visit(Menus.client_list[b-1])
                                 visits = Person.get_num_visits(Menus.client_list[b-1])
                                 if visits%5 == 0 :
                                     money = money + 80
                                 else:
                                     money = money + 100
-                        if ine == "C" :
-                            adults = adults + 1
-                            Person.append_visit(Menus.client_list[b-1])
-                            visits = Person.get_num_visits(Menus.client_list[b-1])
-                            if visits%5 == 0 :
-                                money = money + 40
-                            else:
-                                money = money + 50
-                        visitors.append(Person.get_name(av_clients(b-1)))
-                        av_clients.remove(b-1)
-                        count = count + 1
-                elif g == 0 :
-                    if count < 1:
-                        print("Add at least one visitor")
-                    else:
-                        break
-            print("Set the date.")
-            date = " "
-            date = Menus.__set_date()
-            tour = Tour(guide, visitors, money, date, kids, adults)
-            Menus.tour_list.append(tour)
+                            elif ine == "C" :
+                                adults = adults + 1
+                                Person.add_visit(Menus.client_list[b-1])
+                                visits = Person.get_num_visits(Menus.client_list[b-1])
+                                if visits%5 == 0 :
+                                    money = money + 40
+                                else:
+                                    money = money + 50
+                            visitors.append(Person.get_name(Menus.client_list[b-1]))
+                            av_clients.append(b-1)
+                            count = count + 1 
+            if count > 0:                  
+                print("Set the date.")
+                date = " "
+                date = Menus.__set_date()
+                tour = Tour(guide, visitors, money, date, kids, adults)
+                Menus.tour_list.append(tour)
 
     def __register_maintenance(self):
         tech_found = False
         technicians = []
         for worker in Menus.worker_list:
-            if Worker.__get_role(worker) == "Technician":
+            if Worker.get_role(worker) == "Technician":
                 tech_found = True
                 technicians.append(worker)
         if tech_found == False and not  Menus.animal_list :
@@ -379,19 +386,19 @@ class Menus:
             while True :
                 self.__show_specific_workers(technicians)
                 g = int(input("Select a technician"))
-                if g < 1 and g > len(technicians)+1 :
+                if g < 1 and g > len(technicians) :
                     print("Invalid input")
                 else:
-                    technician = Worker.__get_name(technicians[g-1])
+                    technician = Worker.get_name(technicians[g-1])
                     break
             t=0
             while True :
                 self.__show_animals()
                 t = input("Select an animal: ")
-                if t < 1 and t > len(Menus.animal_list)+1 :
+                if t < 1 and t > len(Menus.animal_list) :
                     print("Invalid input")
                 else:
-                    animal_id = Animal.__get_id(Menus.animal_list[t-1])
+                    animal_id = Animal.get_id(Menus.animal_list[t-1])
                     break
 
             process = input("\nWrite the process: ")
@@ -423,21 +430,31 @@ class Menus:
                 if anyworker in list:
                     i = i + 1
                     print("\nWorker #"+str(i))
-                    Worker.show_slave(list[anyworker])
+                    Worker.show_slave(Menus.worker_list[anyworker])
                 anyworker = anyworker + 1
         print(" ")
 
     def __show_available_clients(self, list):
-        if not list:
+        i = 0
+        anyperson = 0
+        for anyperson in range(len(Menus.client_list)):
+            if anyperson not in list:
+                i = i + 1
+                print("\nClient #"+ str(i))
+                Person.show_client(Menus.client_list[anyperson])
+            anyperson = anyperson + 1
+        print(" ")
+
+    def __show_clients(self):
+        if not Menus.client_list:
             print("There are no clients registered.")
         else:
             anyperson = 0
-            for anyperson in range(len(list)):
+            for anyperson in range(len(Menus.client_list)):
                 print("\nClient #"+ str(anyperson+1))
-                Person.show_client(list[anyperson])
+                Person.show_client(Menus.client_list[anyperson])
                 anyperson = anyperson + 1
-        print(" ")
-
+        print(" ") 
 
     def __show_tours(self):
         if not Menus.tour_list:
@@ -472,7 +489,6 @@ class Menus:
 
         client = Person(name, last_name, birthday, curp, reg_date)
         Menus.client_list.append(client)
-        print(client.get_curp())
 
     def __modify_client(self):
         if not Menus.client_list:
@@ -495,7 +511,7 @@ class Menus:
                         break
                     elif c == 1:
                         Person.set_id(Menus.client_list[cl-1])
-                        print("\nNew ID: " + Person.__get_id(Menus.client_list[cl-1]))
+                        print("\nNew ID: " + Person.get_id(Menus.client_list[cl-1]))
                         break
                     elif c == 2:
                         name = input("\nClient's new name: ")
