@@ -1,11 +1,12 @@
 from Menu import Menus
+import getpass
 
 pass_is_valid = False
 safe_pass = "candeChamba"
 
 while pass_is_valid == False :
-    x = input("\nIntroduce the password: ")
-    if x == safe_pass:
+    cande = getpass.getpass('\nIntroduce the password:')
+    if cande == safe_pass:
         pass_is_valid = True
         j = 0
         for i in range(10):
