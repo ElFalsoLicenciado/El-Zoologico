@@ -12,7 +12,7 @@ public class FunctionsAnimal {
     public static void registerAnimal(){
         System.out.print("\nAnimal's type: ");
         String type = sc.nextLine();
-        double weight=0;
+        double weight= 0.0F;
         do {
             do {
                 try {
@@ -124,7 +124,7 @@ public class FunctionsAnimal {
                 do {
                     do {
                         try {
-                            System.out.print("\n1.Change ID\n2. Change type\n3. Change date of arrival\n4. Change weight\n5. Manage diseases\n6. Change feed type\n7. Change feed frequency\n8. Set diseases\n0. Return");
+                            System.out.print("\n1.Change ID\n2. Change type\n3. Change date of arrival\n4. Change weight\n5. Manage diseases\n6. Change feed type\n7. Change feed frequency\n8. Set vaccines\n0. Return");
                             System.out.print("\nInput: ");
                             c = sc.nextInt();
                             flag = true;
@@ -180,7 +180,7 @@ public class FunctionsAnimal {
                             do {
                                 do {
                                     try {
-                                        System.out.print("\n1. Register disease 2. Dismiss disease\nInput: ");
+                                        System.out.print("\n1. Register disease 2. Dismiss disease 0. Return. \nInput: ");
                                         d = sc.nextInt();
                                         flag = true;
                                     } catch (InputMismatchException e) {

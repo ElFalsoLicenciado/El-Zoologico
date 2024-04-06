@@ -92,7 +92,7 @@ public class FunctionsClient {
                         do {
                             do {
                                 try {
-                                    System.out.print("\nClient's visits: $");
+                                    System.out.print("\nClient's visits: ");
                                     visits = sc.nextInt();
                                     flag = true;
                                 }catch (InputMismatchException e){

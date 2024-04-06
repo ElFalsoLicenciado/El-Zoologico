@@ -43,7 +43,7 @@ public class Worker {
     }
 
     public String getName() {
-        return String.format("%s %S",name,lastName);
+        return String.format("%s %s",name,lastName);
     }
 
     public void setName(String name, String lastName) {
