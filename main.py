@@ -1,11 +1,7 @@
 from Menu import Menus
 
-
 pass_is_valid = False
-safe_pass = "a"
-
-pass_is_valid = False
-safe_pass = "a"
+safe_pass = "candeChamba"
 
 while pass_is_valid == False :
     x = input("\nIntroduce the password: ")
