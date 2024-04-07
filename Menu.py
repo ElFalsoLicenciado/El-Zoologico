@@ -605,7 +605,7 @@ class Menus:
         else:
             anymain = 0
             for anymain in range(len(Menus.maintenance_list)):
-                print("\nTour #"+ str(anymain+1))
+                print("\nMaintenance #"+ str(anymain+1))
                 print(Maintenance.get_details(Menus.maintenance_list[anymain]))
                 anymain = anymain + 1
             print(" ")
@@ -905,7 +905,7 @@ class Menus:
         m = 0
         y = 0
         d = 0
-        while y < 1000 or y > 2024:
+        while True:
             y = input("Write the year: ")
             try:
                 pp = int(y)
@@ -915,6 +915,8 @@ class Menus:
                 y = int(y)
                 if y < 1000 or y > 2024:
                     print("Are you even human?")
+                else:
+                    break
         
         if y%4 == 0:
             while m <=0 or m >12:
