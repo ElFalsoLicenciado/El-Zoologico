@@ -481,6 +481,7 @@ class Menus:
     def __register_maintenance(self):
         tech_found = False
         technicians = []
+        comments = []
         worker = 0
         for worker in range(len(Menus.worker_list)):
             if Worker.get_role(Menus.worker_list[worker]) == "Technician":
@@ -529,7 +530,7 @@ class Menus:
             print("Set the date: ")
             date = Menus.__set_date()
 
-            comments = " "
+            
             jk = 0
             while True :
                 print("Would you like to add a comment?\n1.Yes   0.No")
@@ -544,9 +545,8 @@ class Menus:
                         print("Invalid input")
                     elif jk == 1 :
                         com = input("Write the comment: ")
-                        comments = comments + "\n" + com
+                        comments.append(com)
                     elif jk == 0 :
-                        comments = comments
                         break
             id = len(Menus.maintenance_list)+1
             maintenance = Maintenance(technician, animal_id, process, date, comments, id)
@@ -566,16 +566,6 @@ class Menus:
                 anyworker = anyworker + 1
         print(" ")
 
-    def __show_available_clients(self, list):
-        i = 0
-        anyperson = 0
-        for anyperson in range(len(Menus.client_list)):
-            if anyperson not in list:
-                i = i + 1
-                print("\nClient #"+ str(i))
-                Person.show_client(Menus.client_list[anyperson])
-            anyperson = anyperson + 1
-        print(" ")
 
     def __show_clients(self):
         if not Menus.client_list:
@@ -919,7 +909,7 @@ class Menus:
                     break
         
         if y%4 == 0:
-            while m <=0 or m >12:
+            while True:
                 m = input("\nSelect a month.\n1.January 2. February 3. March 4. April 5. May 6. June\n7. July 8. August 9. September 10. October 11. November 12. December\nInput: ")
                 try:
                     pp = int(m)
@@ -930,7 +920,7 @@ class Menus:
                     if m <= 0 or m > 12:
                         print("Invalid input.")
                     elif m == 1 or m == 3 or m ==5 or m==7 or m==8 or m==10 or m==12 :
-                        while d<= 0 or d>31:
+                        while True:
                             d = input("Write the day: ")
                             try:
                                 pp = int(d)
@@ -940,8 +930,11 @@ class Menus:
                                 d = int(d)
                                 if d<= 0 or d>31:
                                     print("invalid input")
+                                else:
+                                    break
+                        break
                     elif m == 2:
-                        while d<= 0 or d>29:
+                        while True:
                             d = input("Write the day: ")
                             try:
                                 pp = int(d)
@@ -951,8 +944,11 @@ class Menus:
                                 d = int(d)
                                 if d<= 0 or d>29:
                                     print("invalid input")
+                                else:
+                                    break
+                        break
                     elif m == 4 or m==6 or m==9 or m==11:
-                        while d<= 0 or d>30:
+                        while True:
                             d = input("Write the day: ")
                             try:
                                 pp = int(d)
@@ -962,8 +958,11 @@ class Menus:
                                 d = int(d)
                                 if d<= 0 or d>30:
                                     print("invalid input")
+                                else:
+                                    break
+                        break
         else:
-            while m <=0 or m >12:
+            while True:
                 m = input("\nSelect a month.\n1.January 2. February 3. March 4. April 5. May 6. June\n7. July 8. August 9. September 10. October 11. November 12. December\nInput: ")
                 try:
                     pp = int(m)
@@ -974,7 +973,7 @@ class Menus:
                     if m <= 0 or m > 12:
                         print("Invalid input.")
                     elif m == 1 or m == 3 or m ==5 or m==7 or m==8 or m==10 or m==12 :
-                        while d<= 0 or d>31:
+                        while True:
                             d = input("Write the day: ")
                             try:
                                 pp = int(d)
@@ -984,8 +983,11 @@ class Menus:
                                 d = int(d)
                                 if d<= 0 or d>31:
                                     print("invalid input")
+                                else:
+                                    break
+                        break
                     elif m == 2:
-                        while d<= 0 or d>28:
+                        while True:
                             d = input("Write the day: ")
                             try:
                                 pp = int(d)
@@ -995,8 +997,11 @@ class Menus:
                                 d = int(d)
                                 if d<= 0 or d>28:
                                     print("invalid input")
+                                else:
+                                    break
+                        break
                     elif m == 4 or m==6 or m==9 or m==11:
-                        while d<= 0 or d>30:
+                        while True:
                             d = input("Write the day: ")
                             try:
                                 pp = int(d)
@@ -1006,6 +1011,9 @@ class Menus:
                                 d = int(d)
                                 if d<= 0 or d>30:
                                     print("invalid input")
+                                else:
+                                    break
+                        break
         date = " "+str(d)+"/"+str(m)+"/"+str(y)
         return date
 
